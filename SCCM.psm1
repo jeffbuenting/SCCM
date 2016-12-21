@@ -100,7 +100,7 @@ Function Get-CMDeviceCollectionMember {
     [CmdletBinding()]
     Param (
         [Parameter(Mandatory=$True,ValueFromPipeline=$True)]
-        [PSCustomObject[]]$DeviceCollection
+        [PSCustomObject[]]$DeviceCollection 
     )
     
     Begin {

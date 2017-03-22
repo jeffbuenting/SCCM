@@ -387,91 +387,93 @@ Function Get-SCCMSoftwareUpdateMemberof {
 
 #--------------------------------------------------------------------------------------
 
-Function Remove-SCCMSoftwareUpdateFromGroup {
+function Remove-SCCMSoftwareUpdateFromGroup {
+
+<#
+    .Synopsis
+        Removes a Software update from a Software update group and deployment package.
+
+    .Description
+        Removes a Software update from a Software update group and deployment package.
+
+    .Parameter SoftwareUpdate
+        Update object that we want to remove.  use Get-CMSoftwareUpdate.
+
+    .Parameter SoftwareUpdageGroupname
+
+    .Example
+        Remove the expired or superceeded updates from a Software Update Group
+
+        Get-CMSoftwareUpdate -UpdateGroupName test -Fast | where { $_.issuperseded -or $_.IsExpired } | Remove-sccmSoftwareUpdateFromGroup -verbose
+
+    .Notes
+        Author : Jeff Buenting
+        Date : 2017 MAR 22
+#>
 
     [CmdletBinding()]
-    Param (
-        
-        [String[]]$SUG
+    Param (        
+        [Parameter ( Mandatory = $True, ValuefromPipeline = $True ) ]
+        [PSObject[]]$SoftwareUpdate,
+
+        [String]$softwareUpdateGroupName
     )
 
-     Begin {
-        Write-Verbose "Getting Site Info"
-        $Site = Get-CMSite
+    Begin {
+        Write-Verbose "Getting Softwareupdate Group"
+        $UpdateList = @()
+        $SUGNames = @()
+
+        if ( $SoftwareUpdateGroupname ) {
+            Foreach ( $N in $SoftwareUpdateGroupName ) {
+                $SUG = Get-CMSOftwareUpdateGroup -Name $N
+            }
+        }
+        Else {
+            Write-Verbose "Getting all SOftware update Groups"
+           
+            $SUG = Get-CMSoftwareUpdateGroup
+        }
+
+        $UpdateList = @()
     }
 
     Process {
-        Foreach ( $S in $SUG ) {
-            Write-verbose "Removing updates From Software Update Group $SUG"
+        Foreach ( $S in $SoftwareUpdate ) {
+            Write-verbose "Removing $($S.CI_ID)"
+            
+            # ----- Process each Software update Group
+            Foreach ( $G in $SUG ) {
+                Write-verbose "Checking Software Update Group $($G.LocalizedDisplayname)"
+                Write-Verbose "Current Update Count = $($G.Updates.count)"
 
-            $AuthorizationList = Get-WmiObject -Namespace "root\SMS\site_$($Site.SiteCode)" -Class SMS_AuthorizationList -ComputerName $Site.Servername -Filter "LocalizedDisplayName like '$SUG'" -ErrorAction Stop
-            $AuthorizationList = [wmi]"$($AuthorizationList.__PATH)"
+                $UpdateList = @()
 
-            foreach ($Update in ($AuthorizationList.Updates)) {
-                $CI_ID = Get-WmiObject -Namespace "root\SMS\site_$($Site.SiteCode)" -Class SMS_SoftwareUpdate -ComputerName $Site.ServerName -Filter "CI_ID = '$($Update)'" -ErrorAction Stop 
-                if (($CI_ID.IsExpired -eq $True) -or ($CI_ID.IsSuperseded -eq $True)) {
-                    Write-Verbose "Found Expired/Superseded Update: $($CI_ID.CI_ID)"
-               }
+                foreach ( $U in $G.Updates ) {
+                    if ( $U -ne $S.CI_ID ) {
+                        $UpdateList += $U
+                    }
+                }
+
+                $G.Updates = $UpdateList
+
+                Write-Verbose "Update count after removing listed update = $($G.Updates.count)"
             }
-                
+        }
+    }
+
+    End {
+        Foreach ( $G in $SUG ) {
+            Write-Verbose "Saving Updated SoftwareUpdate : $($G.LocalizedDisplayName)"
+            
+            $G.Put()
         }
     }
 }
 
 #--------------------------------------------------------------------------------------
 
-Function Remove-SCCMExpiredUpdates {
 
-<#
-    .Description
-        Removes expired or superseded updates from an SCCM Software Update Group
-
-    .Link
-        http://gosc.nl/blog/technology/sccm/configmgr-2012-r2-script-remove-expired-updates-software-update-groups/
-
-#>
-
-    [CmdletBinding()]
-    Param (
-        [Parameter( Mandatory=$True,ValueFromPipeline=$True )]
-        [PSCustomObject[]]$SUG,
-
-        [Switch]$PassThru
-    )
-
-     Begin {
-        Write-Verbose "Getting Site Info"
-        $Site = Get-CMSite
-       
-        
-    }
-
-    Process {
-        ForEach ( $S in $SUG ) {
-             Write-Verbose " Removing Expired updates from $($S.LocalizedDisplayname)"
-
-            # ----- Becaue I want to use the set-CIMInstance to save and update the SCCM Software update group ( As I haven't figured out a way to to it anyother way) I need to get the CIM instance of the SUG
-            $SUGWMI = Get-CimInstance -computername $Site.ServerName -Namespace "root\sms\site_$($Site.SiteCode)" -query "SELECT * FROM SMS_AuthorizationList" | where LocalizedDisplayName -eq $S.LocalizedDisplayName
-
-        
-            # ----- Return Updates that are not expired or superseded from Software update groups and add it to the SUG      
-            $Updates = gwmi -computername $Site.ServerName -Namespace "root\sms\site_$($Site.SiteCode)" -query "SELECT SU.* FROM SMS_SoftwareUpdate SU, SMS_CIRelation CIRelation WHERE CIRelation.FromCIID=$($S.CI_ID) AND CIRelation.RelationType=1 AND SU.CI_ID=CIRelation.ToCIID" | where { ($_.IsExpired -eq $False) -or ($_.IsSuperseded -eq $False) } | Select-object -ExpandProperty CI_ID 
-                   
-            $SUGWMI.Updates = $Updates
-          
-
-            Write-Verbose "Saving SUG"
-            Set-CimInstance -InputObject $SUGWMI -PassThru
-            #$SugWMI 
-
-            if ( $PassThru ) {
-                Write-Verbose "Returning New Software Update Group Object"
-                Write-Output (Get-CMSoftwareUpdateGroup -Name $S.LocalizedDisplayName)
-            }
-          
-        }
-    }
-}
 
 
 #----------------------------------------------------------------------------------

@@ -58,7 +58,7 @@
             Write-verbose "Software Updates that are a member of the Software Update Deployment Package : $($P.Name)"
 
             # ----- using CIM to query the Deployment Package content (SMS_PackageToContent) and Join it with the Config Item content (SMS_CIToContent) thus returnint the CI_ID of the Software Updates in the Software update Deployment Package
-            Get-CIMInstance -ComputerName $SiteServer -Namespace "root\sms\site_$SiteCode" -query "SELECT SMS_CITOContent.CI_ID From SMS_CIToContent JOIN SMS_PackageToContent ON SMS_PackageToContent.ContentID=SMS_CIToContent.ContentID where SMS_PackageToContent.PackageID = 'RWV0002D'" | Foreach {
+            Get-CIMInstance -ComputerName $SiteServer -Namespace "root\sms\site_$SiteCode" -query "SELECT SMS_CITOContent.CI_ID From SMS_CIToContent JOIN SMS_PackageToContent ON SMS_PackageToContent.ContentID=SMS_CIToContent.ContentID where SMS_PackageToContent.PackageID = '$($P.PackageID)'" | Foreach {
                 Write-Output (Get-CMSoftwareUpdate -ID $_.CI_ID -Fast)
             }
        }

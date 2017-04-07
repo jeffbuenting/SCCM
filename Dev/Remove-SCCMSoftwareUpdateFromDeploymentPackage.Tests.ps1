@@ -4,7 +4,7 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path) -replace '\.Tests\.', '.'
 
 Describe "Remove-SCCMSoftwareUpdateFromDeploymentPackage" {
    
-   # ----- Get Function Help
+    # ----- Get Function Help
     # ----- Pester to test Comment based help
     # ----- http://www.lazywinadmin.com/2016/05/using-pester-to-test-your-comment-based.html
     Context "Help" {

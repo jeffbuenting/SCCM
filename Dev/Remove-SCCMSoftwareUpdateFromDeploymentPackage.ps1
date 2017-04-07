@@ -25,6 +25,11 @@
         [String]$DeploymentPackage
     )
 
+    Begin {
+        Write-verbose "Getting Sotware Update Deployment Package"
+        $DP = Get-CMSoftwareUpdateDeploymentPackage -Name $DeploymentPackage
+    }
+
     Process {
         Write-Verbose "Removing the following updates from $DeploymentPackage"
         Foreach ( $S in $SoftwareUpdate ) {

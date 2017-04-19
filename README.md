@@ -21,6 +21,12 @@ SCCM module
   - **`[PSObject[]]`SoftwareUpdate** (_Mandatory_):  Software update object that you want to remove.  Use Get-CMSoftwareUpdate to get this object.
   - **`[String]`SoftwareUpdateGroupName** (_Optional_): Software update group you are removing the update from.  If this is left blank then the update will be removed from all Software Update Groups.
 
+- **Remove-SCCMSoftwareUpdateFromDeploymentPackage**
+  - Removes software updates from an SCCM Software Update Deployment Package.  This needs to be done periodically to clean up the unused updates on the deployment points in SCCM.
+  
+  - **`[PSObject[]]`SoftwareUpdate** (_Mandatory_): Software update to remove from the Deployment Package.
+  - **`[String]`DeploymentPackage**: Deployment Package name.
+  
 - **Set-CMBaselineFromSUG**  
   - Assigns Updates from a Software Updtate Group to a Configuration Baseline
   

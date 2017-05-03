@@ -594,6 +594,76 @@ function Remove-SCCMSoftwareUpdateFromDeploymentPackage {
     }
 }
 
+#----------------------------------------------------------------------------------
+
+Function Get-SCCMSoftwareUpdateDeploymentPackageUpdateSourcePath {
+
+<#
+    .Synopsis
+        Returns the Source path of an update in a Deployment Package
+
+    .Description
+        Updates in a Software Update Deployment package have been downloaded to the the storage system.  This Function returns the path to that location.
+
+    .Parameter SoftwareUpdate
+        Software Update Object that is a member of the deploymen package
+
+    .parameter DeploymentPackageName
+        Name of the Software Update Deploymnet package that downloaded the Software Update.
+
+    .Parameter SiteServer
+        Name of the SCCM Site Server.  Defaults to the local computer.
+
+    .Example
+        Return the source path where patch 919678 has been downloaded
+
+        Get-CMSoftwareUpdate -UpdateGroupName Patches -Fast | Get-SCCMSoftwareUpdateDeploymentPackageUpdateSourcePath -DeploymentPackageName Patches -Verbose
+
+    .Notes
+        Author : Jeff Buenting
+        Date : 2017 May 02
+#>
+
+    [CmdletBinding()]
+    Param (
+        [Parameter ( Mandatory = $True, ValueFromPipeline = $True ) ]
+        [PSObject[]]$SoftwareUpdate,
+
+        [Parameter ( Mandatory = $True ) ]
+        [String]$DeploymentPackageName,
+
+        [String]$SiteServer = $env:COMPUTERNAME
+    )
+
+    Begin {
+        Write-verbose "Determining Site Code for site server : $SiteServer"
+        Try {
+            $SiteCode = (Get-CIMInstance -Namespace "root\SMS" -Classname SMS_ProviderLocation -ComputerName $SiteServer -ErrorAction Stop).SiteCode
+        }
+        Catch {
+            $EXceptionMessage = $_.Exception.Message
+            $ExceptionType = $_.exception.GetType().fullname
+            Throw "Add-SCCMUpdateToDeploymentPackage : Unable to determin the SiteCode for $SiteServer.`n`n     $ExceptionMessage`n`n     Exception : $ExceptionType"
+        }
+        
+        Write-Verbose "Getting the DeploymentPackage object for $DeploymentPackageName"
+        $DeploymentPackage = Get-WmiObject -Namespace root/SMS/site_$($SiteCode) -ComputerName $SiteServer -Query "SELECT * FROM SMS_SoftwareUpdatesPackage WHERE Name='$DeploymentPackageName'"
+    }
+
+    Process {
+        Foreach ( $S in $SoftwareUpdate ) {
+            Write-Verbose "Retrieving the path for $($S.ArticleID) in $DeploymentPackageName"
+
+            # ----- Get a the source file location for an Update in a Deployment Package
+            $Update = Get-CIMInstance -ComputerName $SiteServer -Namespace "root\sms\site_$SiteCode" -query "SELECT SMS_PackageToContent.* From SMS_PackageToContent Join SMS_CIToContent ON SMS_CIToContent.ContentID=SMS_PackageToContent.ContentID where SMS_CIToContent.CI_ID = $($S.CI_ID) and SMS_PackageToCOntent.PackageID = '$($DeploymentPackage.PackageID)'" 
+            foreach( $U in $Update ) {
+                Write-Output (Get-childitem E:\Sources\UpdateServicesPackages\$DeploymentPackagename | where Name -eq $U.ContentSubFolder).FullName
+            } 
+        }
+    }
+}
+
+
 
 #----------------------------------------------------------------------------------
 # SCCM Client Cmdlets

@@ -657,13 +657,130 @@ Function Get-SCCMSoftwareUpdateDeploymentPackageUpdateSourcePath {
             # ----- Get a the source file location for an Update in a Deployment Package
             $Update = Get-CIMInstance -ComputerName $SiteServer -Namespace "root\sms\site_$SiteCode" -query "SELECT SMS_PackageToContent.* From SMS_PackageToContent Join SMS_CIToContent ON SMS_CIToContent.ContentID=SMS_PackageToContent.ContentID where SMS_CIToContent.CI_ID = $($S.CI_ID) and SMS_PackageToCOntent.PackageID = '$($DeploymentPackage.PackageID)'" 
             foreach( $U in $Update ) {
-                Write-Output (Get-childitem E:\Sources\UpdateServicesPackages\$DeploymentPackagename | where Name -eq $U.ContentSubFolder).FullName
+                Write-Verbose "Update = $($U | out-String)"
+                Write-Output (Get-childitem E:\Sources\UpdateServicesPackages\$DeploymentPackageName | where Name -eq $U.ContentSubFolder)
             } 
         }
     }
 }
 
+#----------------------------------------------------------------------------------
 
+Function Add-SCCMUpdateToDeploymentPackage {
+
+<#
+    .Synopsis
+        Adds a Software Update to a software update deployment package in SCCM
+
+    .Description
+        Sometimes you might want to move the software updates between software update Deployment packages.  Since the update has already been downloaded, this function will add it to a second deploymen package.
+
+    .Parameter SoftwareUpdate
+        This is an SCCM Software Update object to be added to the Deployment Package.
+
+    .Parameter DeploymentPackageName
+        Name of the deployment package that you are adding updates.     
+
+    .Parameter SrcPath
+        Path to the location where the update has been downloaded.  This should be the parent.  That way if there are multilple GUID Downloads associated with one patch, they will all be included with the upda
+
+        This cannot be the same path as another Deployment Package.
+
+    .Paramete SiteServer
+        SCCM Site Server.
+
+    Example
+        Gets a list of updates from a software Update Group.  "Downloads" the updates to a temporary location and adds them to the software update deploymnet package
+
+        $Updates = Get-CMSoftwareUpdate -UpdateGroupName Patches -Fast
+
+        foreach ( $U in $Updates ) {
+    
+            # ----- Copy the update from the the Deployment Package to a temporary location
+            $Path = @()
+            Get-SCCMSoftwareUpdateDeploymentPackageUpdateSourcePath -softwareUpdate $U -DeploymentPackageName Patches -ErrorAction Stop | Foreach {
+                Try {
+                    if ( -Not (Test-Path -Path "C:\temp\patch\$($_.Name) -ErrorAction Stop" ) ) { 
+                        New-Item -Path "C:\temp\patch\$($_.Name)" -ItemType Directory -ErrorAction Stop | Out-Null
+                    }
+                    Write-Output "Copying"
+                    Copy-Item -Path "$($_.FullName)\*.*" -Destination "C:\temp\patch\$($_.Name)\" -Recurse -erroraction Stop
+                }
+                Catch {
+                    $EXceptionMessage = $_.Exception.Message
+                    $ExceptionType = $_.exception.GetType().fullname
+                    Throw "Error Copying patch to Temporary location. `n`n     $ExceptionMessage`n`n     Exception : $ExceptionType"       
+                }
+
+                $Path += "C:\temp\patch\$($_.Name)\"
+            }
+
+            # ----- Add to Deployment Package    
+           Add-SCCMUpdateToDeploymentPackage -SoftwareUpdate $U -DeploymentPackageName Test -SrcPath $Path -verbose
+
+            # ----- Clean up Temp File
+            Foreach ( $P in $Path ) { Remove-Item -Path $P -Recurse -Force }
+        }
+
+    .Links
+        https://www.petervanderwoude.nl/post/add-update-content-to-a-deployment-package-via-powershell-in-configmgr-2012/
+
+    .Notes
+        Author : Jeff Buenting
+        Date : 2017 MAY 08
+#>
+
+    [CmdletBinding()]
+    Param (
+        [Parameter ( Mandatory = $True, ValueFromPipeline = $True ) ]
+        [PSObject[]]$SoftwareUpdate,
+
+        [Parameter ( Mandatory = $True ) ]
+        [String]$DeploymentPackageName,
+
+        [String[]]$SrcPath = 'c:\temp',
+
+        [String]$SiteServer = $env:COMPUTERNAME
+    )
+
+    Begin {
+        Write-verbose "Determining Site Code for site server : $SiteServer"
+        Try {
+            $SiteCode = (Get-CIMInstance -Namespace "root\SMS" -Classname SMS_ProviderLocation -ComputerName $SiteServer -ErrorAction Stop).SiteCode
+        }
+        Catch {
+            $EXceptionMessage = $_.Exception.Message
+            $ExceptionType = $_.exception.GetType().fullname
+            Throw "Add-SCCMUpdateToDeploymentPackage : Unable to determin the SiteCode for $SiteServer.`n`n     $ExceptionMessage`n`n     Exception : $ExceptionType"
+        }
+        
+        Write-Verbose "Getting the DeploymentPackage object for $DeploymentPackageName"
+        $DeploymentPackage = Get-WmiObject -Namespace root/SMS/site_$($SiteCode) -ComputerName $SiteServer -Query "SELECT * FROM SMS_SoftwareUpdatesPackage WHERE Name='$DeploymentPackageName'"   
+    }
+
+    Process {
+        
+        Foreach ( $S in $SoftwareUpdate ) {
+
+            Write-Verbose "Adding $($S.ArticleID) to $DeploymentPackageName"
+
+            $ContentID = Get-WmiObject -Namespace root/SMS/site_$($SiteCode) -ComputerName $SiteServer -Query "SELECT * FROM SMS_CIToContent where SMS_CIToContent.CI_ID='$($S.CI_ID)'" | Select-Object -ExpandProperty ContentID
+
+            Write-Verbose "add"
+            if ( ($DeploymentPackage.AddUpdateContent( $ContentID,$SrcPath,$False )).ReturnValue -ne 0 ) {
+                Throw "Add-SCCMUpdateToDeploymentPackage : Error adding Software Update $($S.ArticleID) (ArticleID) to $DeploymentPackage"
+            }
+        }   
+    }
+
+    End {
+        # ----- Refresh the software update package distribution point
+        Write-Verbose "Refreshing distribution points for Software Update Group: $DeploymnentPackageName"
+        if ( ($DeploymentPackage.RefreshPkgSource()).ReturnValue -ne 0 ) {
+            Throw "Add-SCCMUpdateToDeploymentPackage : Error refreshing the deployment point for Software updatae group $DeploymentPackageName"
+        }
+    }
+}
 
 #----------------------------------------------------------------------------------
 # SCCM Client Cmdlets

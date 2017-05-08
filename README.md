@@ -27,6 +27,23 @@ SCCM module
   - **`[PSObject[]]`SoftwareUpdate** (_Mandatory_): Software update to remove from the Deployment Package.
   - **`[String]`DeploymentPackage**: Deployment Package name.
   
+- **Get-SCCMSoftwareUpdateDeploymentPackageUpdateSourcePath**
+  - Returns the Source path of an update in a Deployment Package.
+  
+  - **`[PSObject[]]`SoftwareUpdate** (_Mandatory_):  Software update object that you want to remove.  Use Get-CMSoftwareUpdate to get this object.
+  - **`[String]`$DeploymentPackageName** (_Mandatory_): Deployment Package name.
+  - **`[String]$SiteServer: SCCM Site Server.  Defaults to the local computer
+  
+- **Add-SCCMUpdateToDeploymentPackage**  
+  - Adds a Software Update to a Software Update Deployment Package in SCCM.
+  
+  - **`[PSObject[]]`SoftwareUpdate** (_Mandatory_):  Software update object that you want to remove.  Use Get-CMSoftwareUpdate to get this object.
+  - **`[String]`$DeploymentPackageName** (_Mandatory_): Deployment Package name.
+  - **`[String[]]`SrcPath**: Path to the location where the update has been downloaded.  This should be the parent.  That way if there are multilple GUID Downloads associated with one patch, they will all be included with the upda
+
+        This cannot be the same path as another Deployment Package.
+  - **`[String]$SiteServer: SCCM Site Server.  Defaults to the local computer
+  
 - **Set-CMBaselineFromSUG**  
   - Assigns Updates from a Software Updtate Group to a Configuration Baseline
   

@@ -26,6 +26,7 @@ SCCM module
   
   - **`[PSObject[]]`SoftwareUpdate** (_Mandatory_): Software update to remove from the Deployment Package.
   - **`[String]`DeploymentPackage**: Deployment Package name.
+  - **`[Switch]`Force**:  Forces the removal of the software update from a Software Update Deployment Package. This does not remove membership from a Software Update Group.
   
 - **Get-SCCMSoftwareUpdateDeploymentPackageUpdateSourcePath**
   - Returns the Source path of an update in a Deployment Package.
@@ -39,8 +40,8 @@ SCCM module
   
   - **`[PSObject[]]`SoftwareUpdate** (_Mandatory_):  Software update object that you want to remove.  Use Get-CMSoftwareUpdate to get this object.
   - **`[String]`$DeploymentPackageName** (_Mandatory_): Deployment Package name.
-  - **`[String[]]`SrcPath**: Path to the location where the update has been downloaded.  This should be the parent.  That way if there are multilple GUID Downloads associated with one patch, they will all be included with the upda
-
+  - **`[String[]]`SrcPath**: Path to the location where the update has been downloaded.  This should be the parent.  That way if there are multilple GUID Downloads associated with one patch, they will all be included with the update  
+  
         This cannot be the same path as another Deployment Package.
   - **`[String]$SiteServer: SCCM Site Server.  Defaults to the local computer
   

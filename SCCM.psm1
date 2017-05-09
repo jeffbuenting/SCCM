@@ -488,6 +488,9 @@ function Remove-SCCMSoftwareUpdateFromDeploymentPackage {
     .Parameter DeploymentPackage
         Deployment Package name.
 
+    .Parameter Force
+        Forces the removal of the software update from a Software Update Deployment Package. This does not remove membership from a Software Update Group.
+
     .Example
         Remove a software update from a software update deployment Package.
 
@@ -519,7 +522,9 @@ function Remove-SCCMSoftwareUpdateFromDeploymentPackage {
         [PSObject[]]$SoftwareUpdate,
 
         [Parameter ( Mandatory = $True ) ]
-        [String]$DeploymentPackage
+        [String]$DeploymentPackage,
+
+        [Switch]$Force
     )
 
     Begin {
@@ -551,8 +556,38 @@ function Remove-SCCMSoftwareUpdateFromDeploymentPackage {
             } 
 
             if ( $SUG ) {
-                Write-Warning "$($S.ArticleID) is a member of Software UpdateGroup(s):`n$($SUG | out-string)"
-                Write-Warning "Not sure if I want to have a force switch included so that the update is removed from the Software Update Groups"
+                if ( $Force ) {
+                    Write-Verbose "Force switch"
+                
+                    # ----- Convert Software update ID to Package Content ID.
+                    # Software packages are a little bit different from the other software updates objects. This is how the various objects relate:
+                    # SMS_SoftwareUpdate <-> SMS_CiToContent <-> SMS_PackageToContent <-> SMS_SoftwareUpdatesPackage
+
+                    Try {
+                        $Update = Get-CIMInstance -ComputerName rwva-sccm -Namespace "root\sms\site_rwv" -query "SELECT SMS_PackageToContent.* From SMS_PackageToContent Join SMS_CIToContent ON SMS_CIToContent.ContentID=SMS_PackageToContent.ContentID where SMS_CIToContent.CI_ID = $($S.CI_ID) and SMS_PackageToCOntent.PackageID = '$($DP.PackageID)'" -ErrorAction Stop
+                    }
+                    Catch {
+                        $EXceptionMessage = $_.Exception.Message
+                        $ExceptionType = $_.exception.GetType().fullname
+                        Throw "Remove-SCCMSoftwareUpdateFromDeploymentPackage : Error converting Software Update CI_ID to Package Content ID $DeploymentPackage`n`n     $ExceptionMessage`n`n     Exception : $ExceptionType"       
+                    }
+
+                    if ( $Update ) {
+                        $Update.contentid
+
+                        # ----- Remove from software update package
+                        if ( ($DP.RemoveContent( $Update.ContentID,$False )).ReturnValue -ne 0 ) {
+                            Throw "Remove-SCCMSoftwareUpdateFromDeploymentPackage : Error Removing $($S.ArticleID) from $($DP.Name)"
+                        }
+                    }
+                    Else {
+                        Throw "Remove-SCCMSoftwareUpdateFromDeploymentPackage : $($S.ArticleID) does not exist in Software Update Group $($DP.Name)"
+                    }
+                }
+                Else {
+                    Write-Warning "$($S.ArticleID) is a member of Software UpdateGroup(s):`n$($SUG | out-string)"
+                    Write-Warning "Use the Force switch to force removal of the update from the Software Update Deployment Package"
+                }
             }
             else {
                 Write-Verbose "$($S.ArticleID) is not a member of a software update group."

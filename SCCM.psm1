@@ -524,7 +524,9 @@ function Remove-SCCMSoftwareUpdateFromDeploymentPackage {
         [Parameter ( Mandatory = $True ) ]
         [String]$DeploymentPackage,
 
-        [Switch]$Force
+        [Switch]$Force,
+
+        [switch]$Refresh
     )
 
     Begin {
@@ -622,10 +624,75 @@ function Remove-SCCMSoftwareUpdateFromDeploymentPackage {
 
     End {
         # ----- Refresh the software update package distribution point
-        Write-Verbose "Refreshing distribution points for Software Update Group: $($DP.Name)"
-        if ( ($DP.RefreshPkgSource()).ReturnValue -ne 0 ) {
-            Throw "Remove-SCCMSoftwareUpdateFromDeploymentPackage : Error refreshing the deployment point for Software updatae group $($DP.Name)"
+        if ( $Refresh ) {
+            Write-Verbose "Refreshing distribution points for Software Update Group: $($DP.Name)"
+            if ( ($DP.RefreshPkgSource()).ReturnValue -ne 0 ) {
+                Throw "Remove-SCCMSoftwareUpdateFromDeploymentPackage : Error refreshing the deployment point for Software updatae group $($DP.Name)"
+            }
         }
+    }
+}
+
+#----------------------------------------------------------------------------------
+
+Function Refresh-SCCMSoftwareUpdateDeploymentPackage {
+
+<#
+    .Synopsis
+        Refreshes the Software Update Deployment Package on the distribution point
+
+    .Description
+        Refreshes the Software Update Deployment Package on the distribution point.  This Function was moved outside of the other Deployment Package functions because it speeds up the processes to not refresh during pipline input.
+
+    .Parameter DeploymentPackageName
+        Name of the Deployment Package to refresh.
+
+    .Parameter SiteServer
+        Name of the SCCM Site Server
+
+    .Example
+        Refreshes the test software update deployment package.
+
+        Refresh-SCCMSoftwareUpdateDeploymentPackage -DeploymentPackageName Test
+
+    .Note
+        Author : Jeff Buenting
+        Date : 2017 May 09
+#>
+    
+    [CmdletBinding()]
+    Param (
+        [Parameter ( Mandatory = $True ) ]
+        [String]$DeploymentPackageName,
+
+        [String]$SiteServer = $env:COMPUTERNAME
+    )
+
+   
+    Write-verbose "Determining Site Code for site server : $SiteServer"
+    Try {
+        $SiteCode = (Get-CIMInstance -Namespace "root\SMS" -Classname SMS_ProviderLocation -ComputerName $SiteServer -ErrorAction Stop).SiteCode
+    }
+    Catch {
+        $EXceptionMessage = $_.Exception.Message
+        $ExceptionType = $_.exception.GetType().fullname
+        Throw "Refresh-SCCMSoftwareUpdateDeploymentPackage : Unable to determin the SiteCode for $SiteServer.`n`n     $ExceptionMessage`n`n     Exception : $ExceptionType"
+    }
+        
+    Write-verbose "Getting Sotware Update Deployment Package $DeploymentPackage"
+    Try {
+        # ----- The built in cmdlet Get-CMSoftwareUpdateDeploymentPackage does not have a method to remove updates.  Using CIMInstance also does not return a usable method.  THerefor I must use the depricated get-WMIObject.
+        $DeploymentPackage =  Get-WmiObject -Namespace root/SMS/site_$($SiteCode) -ComputerName $SiteServer -Query "SELECT * FROM SMS_SoftwareUpdatesPackage WHERE Name='$DeploymentPackageName'" -ErrorAction Stop
+    }
+    Catch {
+        $EXceptionMessage = $_.Exception.Message
+        $ExceptionType = $_.exception.GetType().fullname
+        Throw "Refresh-SCCMSoftwareUpdateDeploymentPackage : Error getting Software Update Deployment Package $DeploymentPackageName`n`n     $ExceptionMessage`n`n     Exception : $ExceptionType"       
+    }
+
+    Write-Verbose "Refreshing distribution points for Software Update Group: $DeploymnentPackageName"
+    if ( ($DeploymentPackage.RefreshPkgSource()).ReturnValue -ne 0 ) {
+        Throw "Add-SCCMUpdateToDeploymentPackage : Error refreshing the deployment point for Software updatae group $DeploymentPackageName"
     }
 }
 
@@ -775,7 +842,9 @@ Function Add-SCCMUpdateToDeploymentPackage {
 
         [String[]]$SrcPath = 'c:\temp',
 
-        [String]$SiteServer = $env:COMPUTERNAME
+        [String]$SiteServer = $env:COMPUTERNAME,
+
+        [Switch]$Refresh
     )
 
     Begin {
@@ -810,9 +879,11 @@ Function Add-SCCMUpdateToDeploymentPackage {
 
     End {
         # ----- Refresh the software update package distribution point
-        Write-Verbose "Refreshing distribution points for Software Update Group: $DeploymnentPackageName"
-        if ( ($DeploymentPackage.RefreshPkgSource()).ReturnValue -ne 0 ) {
-            Throw "Add-SCCMUpdateToDeploymentPackage : Error refreshing the deployment point for Software updatae group $DeploymentPackageName"
+        if ( $Refresh ) {
+            Write-Verbose "Refreshing distribution points for Software Update Group: $DeploymnentPackageName"
+            if ( ($DeploymentPackage.RefreshPkgSource()).ReturnValue -ne 0 ) {
+                Throw "Add-SCCMUpdateToDeploymentPackage : Error refreshing the deployment point for Software updatae group $DeploymentPackageName"
+            }
         }
     }
 }

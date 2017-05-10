@@ -27,6 +27,7 @@ SCCM module
   - **`[PSObject[]]`SoftwareUpdate** (_Mandatory_): Software update to remove from the Deployment Package.
   - **`[String]`DeploymentPackage**: Deployment Package name.
   - **`[Switch]`Force**:  Forces the removal of the software update from a Software Update Deployment Package. This does not remove membership from a Software Update Group.
+  - **`[Switch]`Refresh**: Including this switch will refresh the software update deployment package on the deployment point.  For efficiency sake it may be better to do a refresh after all changes have been made.
   
 - **Get-SCCMSoftwareUpdateDeploymentPackageUpdateSourcePath**
   - Returns the Source path of an update in a Deployment Package.
@@ -43,6 +44,13 @@ SCCM module
   - **`[String[]]`SrcPath**: Path to the location where the update has been downloaded.  This should be the parent.  That way if there are multilple GUID Downloads associated with one patch, they will all be included with the update  
   
         This cannot be the same path as another Deployment Package.
+  - **`[String]$SiteServer: SCCM Site Server.  Defaults to the local computer
+  - **`[Switch]`Refresh**: Including this switch will refresh the software update deployment package on the deployment point.  For efficiency sake it may be better to do a refresh after all changes have been made.
+  
+- **Refresh-SCCMSoftwareUpdateDeploymentPackage**
+  - Refreshes the Software Update Deployment Package on the distribution point.  This Function was moved outside of the other Deployment Package functions because it speeds up the processes to not refresh during pipline input.  
+  
+  - **`[String]`$DeploymentPackageName** (_Mandatory_): Deployment Package name.
   - **`[String]$SiteServer: SCCM Site Server.  Defaults to the local computer
   
 - **Set-CMBaselineFromSUG**  

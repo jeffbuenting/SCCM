@@ -491,6 +491,9 @@ function Remove-SCCMSoftwareUpdateFromDeploymentPackage {
     .Parameter Force
         Forces the removal of the software update from a Software Update Deployment Package. This does not remove membership from a Software Update Group.
 
+    .Parameter Refresh
+        including this switch will refresh the software update deployment package on the deployment point.  For efficiency sake it may be better to do a refresh after all changes have been made.
+
     .Example
         Remove a software update from a software update deployment Package.
 
@@ -790,6 +793,9 @@ Function Add-SCCMUpdateToDeploymentPackage {
 
     .Paramete SiteServer
         SCCM Site Server.
+
+    .Parameter Refresh
+        including this switch will refresh the software update deployment package on the deployment point.  For efficiency sake it may be better to do a refresh after all changes have been made.
 
     Example
         Gets a list of updates from a software Update Group.  "Downloads" the updates to a temporary location and adds them to the software update deploymnet package

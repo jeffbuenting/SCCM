@@ -2,6 +2,9 @@
 
 SCCM module
 
+###Version
+	2.1
+
 ### Resources
 
 - **Clear-SCCMClientCache**  
@@ -21,6 +24,12 @@ SCCM module
   - **`[PSObject[]]`SoftwareUpdate** (_Mandatory_):  Software update object that you want to remove.  Use Get-CMSoftwareUpdate to get this object.
   - **`[String]`SoftwareUpdateGroupName** (_Optional_): Software update group you are removing the update from.  If this is left blank then the update will be removed from all Software Update Groups.
 
+- **Get-SCCMSoftwareUpdateDeploymentPackage**
+  - Retrieves SCCM Software Update Deployment Packages.
+
+  - **`[String]`SiteServer** : Computer name of the SCCM Site server.  
+  - **`[String[]]`Name** : Name of the Deployment Package(s) to return.
+  
 - **Remove-SCCMSoftwareUpdateFromDeploymentPackage**
   - Removes software updates from an SCCM Software Update Deployment Package.  This needs to be done periodically to clean up the unused updates on the deployment points in SCCM.
   

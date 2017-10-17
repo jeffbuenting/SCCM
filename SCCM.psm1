@@ -473,6 +473,70 @@ function Remove-SCCMSoftwareUpdateFromGroup {
 
 #--------------------------------------------------------------------------------------
 
+Function Get-SCCMSoftwareUpdateDeploymentPackage {
+
+<#
+    .Synopsis
+        Retrieves a list of Software Update Deployment Packages.
+
+    .Description
+        Retrieves an object containing information on SCCM Software Update Deployment Packages.
+
+    .Parameter SiteServer
+        Computer name of the SCCM Site server.
+
+    .Parameter Name
+        Name of the Deployment Package(s) to return.
+
+    .Example
+        Returns deployment package named test.
+
+        Get-SCCMSoftwareUpdateDeploymentPackage -SiteServer "SCCMServer" -Name "Test"
+
+    .Notes
+        Author : Jeff Buenting
+        Date : 2017 OCT 17
+
+#>
+
+    [CmdletBinding()]
+    Param (
+        [String]$SiteServer = $ENV:ComputerName,
+
+        [String[]]$Name
+    )
+
+    Write-verbose "Determining Site Code for site server : $SiteServer"
+    Try {
+        $SiteCode = (Get-CIMInstance -Namespace "root\SMS" -Classname SMS_ProviderLocation -ComputerName $SiteServer -ErrorAction Stop).SiteCode
+    }
+    Catch {
+        $EXceptionMessage = $_.Exception.Message
+        $ExceptionType = $_.exception.GetType().fullname
+        Throw "Get-SCCMSoftwareUpdateDeploymentPackage : Unable to determin the SiteCode for $SiteServer.`n`n     $ExceptionMessage`n`n     Exception : $ExceptionType"
+    }
+
+    Try {
+        if ( $DeploymentPackage ) {
+            Foreach ( $D in $Name ) {
+                Write-verbose "Retrieving object for deployment package = $D"
+                Get-CimInstance -ComputerName $SiteServer -ClassName SMS_SoftwareUpdatesPackage -Namespace root\sms\$Site -Filter "Name = '$DeploymentPackage'" -ErrorAction Stop
+            }
+        }
+        Else {
+            Write-Verbose "Retrieving all Deployment Packages"
+            Get-CimInstance -ComputerName $SiteServer -ClassName SMS_SoftwareUpdatesPackage -Namespace root\sms\$Site
+        }
+    }
+    Catch {
+        $EXceptionMessage = $_.Exception.Message
+        $ExceptionType = $_.exception.GetType().fullname
+        Throw "Get-SCCMSoftwareUpdateDeploymentPackage : Error retrieving software update Deployment Packages.`n`n     $ExceptionMessage`n`n     Exception : $ExceptionType"
+    }
+}
+
+#--------------------------------------------------------------------------------------
+
 function Remove-SCCMSoftwareUpdateFromDeploymentPackage {
 
 <#

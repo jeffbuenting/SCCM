@@ -12,7 +12,7 @@
 RootModule = 'sccm.psm1'
 
 # Version number of this module.
-ModuleVersion = '2.0'
+ModuleVersion = '2.1'
 
 # ID used to uniquely identify this module
 GUID = 'addcbc3c-09ed-490f-81c2-28e5a0509662'

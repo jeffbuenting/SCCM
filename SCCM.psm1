@@ -520,12 +520,12 @@ Function Get-SCCMSoftwareUpdateDeploymentPackage {
         if ( $DeploymentPackage ) {
             Foreach ( $D in $Name ) {
                 Write-verbose "Retrieving object for deployment package = $D"
-                Get-CimInstance -ComputerName $SiteServer -ClassName SMS_SoftwareUpdatesPackage -Namespace root\sms\$Site -Filter "Name = '$DeploymentPackage'" -ErrorAction Stop
+                Get-CimInstance -ComputerName $SiteServer -ClassName SMS_SoftwareUpdatesPackage -Namespace root\sms\$SiteCode -Filter "Name = '$DeploymentPackage'" -ErrorAction Stop
             }
         }
         Else {
             Write-Verbose "Retrieving all Deployment Packages"
-            Get-CimInstance -ComputerName $SiteServer -ClassName SMS_SoftwareUpdatesPackage -Namespace root\sms\$Site
+            Get-CimInstance -ComputerName $SiteServer -ClassName SMS_SoftwareUpdatesPackage -Namespace root\sms\$SiteCode
         }
     }
     Catch {

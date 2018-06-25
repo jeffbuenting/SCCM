@@ -34,7 +34,7 @@ Function Start-CMClientAction {
     Process {
         Foreach ( $C in $ComputerName ) {
             Write-Verbose "Running $Action on $C"
-            $SMSClient = Get-WmiObject -ComputerName $C -Namespace "root\ccm" -ClassName SMS_Client -list
+            $SMSClient = Get-CimClass -ComputerName $C -Namespace "root\ccm" -ClassName SMS_Client 
             
             Switch ( $Action ) {
                 'HardwareInventory' { 

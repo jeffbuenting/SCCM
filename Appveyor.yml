@@ -1,0 +1,50 @@
+# See http://www.appveyor.com/docs/appveyor-yml for many more options
+
+# Skip on updates to the readme.
+# We can force this by adding [skip ci] or [ci skip] anywhere in commit message
+skip_commits:
+  message: /Update Readme and Manifest Version/
+
+environment:
+  access_token:
+    secure: EJ2HHF0klBsYS3WlZWIvcc88u5/gixju8bcOR4d13x6Fh+BA7UNU89/NPkHYP6JN
+
+# branches to build
+branches:
+  # whitelist
+  only:
+    - master
+
+    
+install:
+  - choco install pester
+
+build: false
+
+test_script:
+  - ps: $TestResult = Invoke-Pester -Path "." -OutputFormat NUnitXml -OutputFile TestsResults.xml -PassThru
+  - ps: (New-Object 'System.Net.WebClient').UploadFile("https://ci.appveyor.com/api/testresults/nunit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path .\TestsResults.xml))
+  - ps: if ($TestResult.FailedCount -gt 0) { throw "$($Test.FailedCount) tests failed."}
+ 
+  
+on_success:
+  # ----- Enable Git Credential Store and add token
+  - git config --global credential.helper store
+  
+  # ----- Update Readme.md Version number
+  - ps: Add-Content "$HOME\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
+  - git config --global user.email "jeffbuenting@gmail.com"
+  - git config --global user.name "jeffbuenting"
+  - ps: $Readme = Get-Content readme.md
+  - ps: '$Readme -replace "Version: \d*\.\d*\.\d*","Version: $env:APPVEYOR_BUILD_VERSION" | Set-Content README.md'
+  
+  # ----- Update the module manifests version
+  - ps: Update-ModuleManifest -Path SCCM.psd1 -ModuleVersion $env:APPVEYOR_BUILD_VERSION
+  
+  # ----- Push back to Github
+  - git checkout master
+  - git add --all
+  - git status
+  - git commit -s -m "Update Readme and Manifest Version"
+  - git push origin master
+  

@@ -11,7 +11,13 @@ Get-CMDevice | where { ( $_.IsClient -eq $False ) -and ( $_.Name -ne 'RWVA' ) } 
     if ( Test-Connection -ComputerName $_.Name -Quiet ) { 
     
         # ----- Because I am lazy and have not configured the Install account to be a member of the local admin on each machine.  I add it here.
-        get-LocalGroup -computerName $_.Name -Group Administrators
+        # ----- Need admin rights on machine to install SCCM Client.  We use the SCCMNaa account for this.
+        if ( (Get-LocalGroup -computerName $Server -Group Administrators | Get-LocalGroupMember) -notcontains 'stratuscloud1\sccmnaa' ) {
+    
+            invoke-command -ComputerName $Server  -ScriptBlock {
+                ([ADSI]"WinNT://$using:Server/Administrators,group").Add("WinNT://stratuscloud1/sccmnaa")
+            }
+        }
     }
 }
 

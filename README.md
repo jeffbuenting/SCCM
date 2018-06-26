@@ -2,8 +2,12 @@
 
 SCCM module
 
-###Version
-	2.1
+### Master
+
+Version: 2.0.1
+
+[![Build status](https://ci.appveyor.com/api/projects/status/pwk40ctp7fbxqbah/branch/master?svg=true)](https://ci.appveyor.com/project/jeffbuenting/sccm/branch/master)
+
 
 ### Resources
 

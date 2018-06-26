@@ -45,16 +45,20 @@ foreach ( $S in $Servers ) {
         copy-item F:\temp\7z1805-x64.msi -Destination "\\$($S.Name)\c$\Temp" -Force
 
 
-        invoke-command -Session $Session -ScriptBlock {
+        invoke-command -Session $Session -ArgumentList $Zip -ScriptBlock {
+            Param ( $ZIPApp )
             # ----- Payload
 
-            if ( $Using:Zip.UninstallString -eq 'C:\Program Files\7-Zip\Uninstall.exe' ) {
+            if ( $ZipApp.UninstallString -eq 'C:\Program Files\7-Zip\Uninstall.exe' ) {
                 Write-Output "Uninstalling with Uninstall.exe"
-                Start-Process -FilePath $Using:Zip.UninstallString -ArgumentList '/S' -Wait -Verb RunAs
+                Start-Process -FilePath $ZIPApp.UninstallString -ArgumentList '/S' -Wait -Verb RunAs
             }
             Else {
                Write-Output "Uninstalling with MSIExec"
-               Start-Process -FilePath c:\windows\system32\msiexec.exe -ArgumentList "/X $Using:Zip.PSChildName /q /norestart" -Wait -Verb RunAs
+               Start-Process -FilePath c:\windows\system32\msiexec.exe -ArgumentList "/X '$ZipApp.PSChildName' /qn /norestart" -Wait -Verb RunAs
+               
+
+              # & C:\Windows\System32\msiexec.exe /X $ZIPApp.PSChildName' /qn /norestart"
             }
          
 

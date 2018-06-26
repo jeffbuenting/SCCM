@@ -3,10 +3,13 @@
 #----------------------------------------------------------------------------------
 
 Function Start-CMClientAction {
-
 <#
+    .Synopsis
+        Initiates an SCCM action on the remote client
+
     .Description
         Initiates an SCCM action on the remote client
+    
 
     .Parameter ComputerName
         Name of the remote client to run action against.
@@ -32,50 +35,58 @@ Function Start-CMClientAction {
     )
 
     Process {
+        Write-Verbose "ComputerName = $($ComputerName | out-string)"
+     
         Foreach ( $C in $ComputerName ) {
-            Write-Verbose "Running $Action on $C"
-            $SMSClient = Get-CimClass -ComputerName $C -Namespace "root\ccm" -ClassName SMS_Client 
             
+            Write-Verbose "Running on $C"
+
+            $SMSClient = Get-WMIObject -ComputerName $C -Namespace "root\ccm" -Class SMS_Client -list
+
+            write-Verbose "----"
+            Write-Verbose $($SMSClient | out-string)
+            write-Verbose "----"
+
             Switch ( $Action ) {
                 'HardwareInventory' { 
                     Write-Verbose "     Running HardWare Inventory"
-                    $SMSClient.TriggerSchedule('{00000000-0000-0000-0000-000000000001}') 
+                    $SMSClient.TriggerSchedule('{00000000-0000-0000-0000-000000000001}') | Out-Null
                 }
                 'SoftwareInventory' { 
                     Write-Verbose "     Running Software Inventory"
-                    $SMSClient.TriggerSchedule('{00000000-0000-0000-0000-000000000002}') 
+                    $SMSClient.TriggerSchedule('{00000000-0000-0000-0000-000000000002}') | Out-Null
                 }
                 'Discovery' { 
                     Write-Verbose "     Running Discovery Data Record"
-                    $SMSClient.TriggerSchedule('{00000000-0000-0000-0000-000000000003}') 
+                    $SMSClient.TriggerSchedule('{00000000-0000-0000-0000-000000000003}') | Out-Null
                 }
                 'MachinePolicy' { 
                     Write-Verbose "     Running Machine Policy"
-                    $SMSClient.TriggerSchedule('{00000000-0000-0000-0000-000000000021}') 
+                    $SMSClient.TriggerSchedule('{00000000-0000-0000-0000-000000000021}') | Out-Null
                 }
                 'FileCollection' { 
                     Write-Verbose "     Running File Collection"
-                    $SMSClient.TriggerSchedule('{00000000-0000-0000-0000-000000000010}') 
+                    $SMSClient.TriggerSchedule('{00000000-0000-0000-0000-000000000010}') | Out-Null
                 }
                 'SoftwareMetering' { 
                     Write-Verbose "     Running Software Metering"
-                    $SMSClient.TriggerSchedule('{00000000-0000-0000-0000-000000000022}') 
+                    $SMSClient.TriggerSchedule('{00000000-0000-0000-0000-000000000022}') | Out-Null
                 }
                 'WinInstallerSourceList' { 
                     Write-Verbose "     Running Windows Installer Source List"
-                    $SMSClient.TriggerSchedule('{00000000-0000-0000-0000-000000000032}') 
+                    $SMSClient.TriggerSchedule('{00000000-0000-0000-0000-000000000032}') | Out-Null
                 }
                 'SoftwareupdateScan' { 
                     Write-Verbose "     Running Software Update Scan"
-                    $SMSClient.TriggerSchedule('{00000000-0000-0000-0000-000000000113}') 
+                    $SMSClient.TriggerSchedule('{00000000-0000-0000-0000-000000000113}') | Out-Null
                 }
                 'SoftwareupdateStore' { 
                     Write-Verbose "     Running Software Update Store"
-                    $SMSClient.TriggerSchedule('{00000000-0000-0000-0000-000000000114}') 
+                    $SMSClient.TriggerSchedule('{00000000-0000-0000-0000-000000000114}') | Out-Null
                 }
                 'SoftwareupdateDeployment' { 
                     Write-Verbose "     Running Software Update Deployment"
-                    $SMSClient.TriggerSchedule('{00000000-0000-0000-0000-000000000108}') 
+                    $SMSClient.TriggerSchedule('{00000000-0000-0000-0000-000000000108}') | Out-Null
                 }
             }
         }

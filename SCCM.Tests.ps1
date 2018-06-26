@@ -8,7 +8,8 @@ $Global:ModuleName = $ModulePath | Split-Path -Leaf
 # ----- Remove and then import the module.  This is so any new changes are imported.
 Get-Module -Name $ModuleName -All | Remove-Module -Force -Verbose
 
-Import-Module "$ModulePath\$ModuleName.PSD1" -Force -ErrorAction Stop  
+Import-Module "$ModulePath\$ModuleName.PSD1" -Force -ErrorAction Stop  -verbose
+
 
 InModuleScope $ModuleName {
 
@@ -41,8 +42,9 @@ InModuleScope $ModuleName {
         # ----- Get Function Help
         # ----- Pester to test Comment based help
         # ----- http://www.lazywinadmin.com/2016/05/using-pester-to-test-your-comment-based.html
-        Context "Help" {
 
+        Context "Help" {
+            
             $H = Help Start-CMClientAction -Full
 
             # ----- Help Tests
@@ -74,16 +76,40 @@ InModuleScope $ModuleName {
             It "has Notes Help Section" {
                 { $H.alertSet } | Should Not BeNullorEmpty
             }
+
         } 
 
-        Mock Get-CimInstance -MockWith {
-            $Obj = New-Object -TypeName PSCustom 
+        Mock Get-WMIObject -MockWith {
+            $Obj = New-Object -TypeName PSObject -Property (@{
+                'Name' = 'SMS_Client'
+            })
 
-            $Obj | Add-Member -MemberType ScriptMethod -Name TriggerSchedule -Value {}
-        }
+            $Obj | Add-Member -MemberType ScriptMethod -Name TriggerSchedule -Value {
+                Param ( $Action )
+            } -Force 
+
+            Return $Obj
+        } -Verifiable
 
         Context Execution {
             
+            It "Should work with single computername as Input" {
+                { Start-CMClientAction -ComputerName 'Server' -Action HardwareInventory } | Should Not Throw
+
+                Assert-VerifiableMock 
+            }
+
+            It "Should work with array of computernames passed in" {
+                { Start-CMClientAction -ComputerName 'Server','ServerA' -Action HardwareInventory } | Should Not Throw
+
+                Assert-VerifiableMock 
+            }
+
+            It "Should work with Pipeline Input" {
+                { 'Server','ServerA' | Start-CMClientAction  -Action HardwareInventory } | Should Not Throw
+
+                Assert-VerifiableMock 
+            }
            
         }
 

@@ -3,9 +3,9 @@ $ZipInstalled = @()
 
 #$Servers = Get-ADComputer -LDAPFilter "(&(objectcategory=computer)(OperatingSystem=*server*))" -properties OperatingSystem #| where Name -Like QA3*
 
-#$Servers = Get-ADComputer -filter *  -properties OperatingSystem 
+$Servers = Get-ADComputer -filter *  -properties OperatingSystem 
 
-$Servers = Get-ADComputer 'WGPQA1-IIS'
+#$Servers = Get-ADComputer 'WGPQA1-IIS'
 
 $I = 0
 foreach ( $S in $Servers ) {

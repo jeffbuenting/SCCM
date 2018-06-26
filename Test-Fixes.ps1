@@ -3,9 +3,9 @@ $ZipInstalled = @()
 
 #$Servers = Get-ADComputer -LDAPFilter "(&(objectcategory=computer)(OperatingSystem=*server*))" -properties OperatingSystem #| where Name -Like QA3*
 
-#$Servers = Get-ADComputer -filter *  -properties OperatingSystem 
+$Servers = Get-ADComputer -filter *  -properties OperatingSystem 
 
-$Servers = Get-ADComputer 'SL-JeffB'
+#$Servers = Get-ADComputer 'SL-JeffB'
 
 $I = 0
 foreach ( $S in $Servers ) {
@@ -35,36 +35,36 @@ foreach ( $S in $Servers ) {
 
     $ZipInstalled += $Zip
 
-    if ( $ZIP.VersionMajor -lt 18 ) {
-
-        Write-Output "7Zip Installed"
-
-        # ----- Copy 7zip locally to avoid the double hop issue
-        if ( -Not ( Test-path -Path "\\$($S.Name)\c$\Temp" ) ) { New-Item -Path "\\$($S.Name)\c$\Temp" -ItemType Directory }
-
-        copy-item F:\temp\7z1805-x64.msi -Destination "\\$($S.Name)\c$\Temp" -Force
-
-
-        invoke-command -Session $Session -ArgumentList $Zip -ScriptBlock {
-            Param ( $ZIPApp )
-            # ----- Payload
-
-            if ( $ZipApp.UninstallString -eq 'C:\Program Files\7-Zip\Uninstall.exe' ) {
-                Write-Output "Uninstalling with Uninstall.exe"
-                Start-Process -FilePath $ZIPApp.UninstallString -ArgumentList '/S' -Wait -Verb RunAs
-            }
-            Else {
-               Write-Output "Uninstalling with MSIExec"
-               Start-Process -FilePath c:\windows\system32\msiexec.exe -ArgumentList "/X '$ZipApp.PSChildName' /qn /norestart" -Wait -Verb RunAs
-               
-
-              # & C:\Windows\System32\msiexec.exe /X $ZIPApp.PSChildName' /qn /norestart"
-            }
-         
-
-            # ----- End Payload
-        }
-    }
+ #   if ( $ZIP.VersionMajor -lt 18 ) {
+ #
+ #       Write-Output "7Zip Installed"
+ #
+ #       # ----- Copy 7zip locally to avoid the double hop issue
+ #       if ( -Not ( Test-path -Path "\\$($S.Name)\c$\Temp" ) ) { New-Item -Path "\\$($S.Name)\c$\Temp" -ItemType Directory }
+ #
+ #       copy-item F:\temp\7z1805-x64.msi -Destination "\\$($S.Name)\c$\Temp" -Force
+ #
+ #
+ #       invoke-command -Session $Session -ArgumentList $Zip -ScriptBlock {
+ #           Param ( $ZIPApp )
+ #           # ----- Payload
+ #         
+ #           if ( $ZipApp.UninstallString -eq 'C:\Program Files\7-Zip\Uninstall.exe' ) {
+ #               Write-Output "Uninstalling with Uninstall.exe"
+ #               Start-Process -FilePath $ZIPApp.UninstallString -ArgumentList '/S' -Wait -Verb RunAs
+ #           }
+ #           Else {
+ #              Write-Output "Uninstalling with MSIExec"
+ #              $Guid = $ZipApp.PSChildName          
+ #
+ #              start-process C:\windows\System32\msiexec.exe -ArgumentList "/X $Guid /qn /norestart" -Wait -Verb RunAs
+ #
+ #           }
+ #        
+ #
+ #           # ----- End Payload
+ #       }
+ #   }
 
 
     Disconnect-PSSession -Session $Session | out-Null 

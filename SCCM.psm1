@@ -17,11 +17,19 @@ Function Start-CMClientAction {
     .Parameter Action
         Action to run on the remote client
 
+    .Example
+        Run hardware inventory on all servers in list $Servers
+
+        Start-CMClientAction -ComputerName $Servers -Action HardwareInventory
+
     .Link
         http://www.configmgr.no/2012/01/17/trigger-sccm-client-action-from-powershell/
 
         List of action IDs
         http://www.moyerteam.com/2012/11/powershell-trigger-configmgr-client-action-scheduleid/
+
+    .Notes
+        Author : Jeff Buenting
 #>
 
     [CmdletBinding()]
@@ -100,11 +108,22 @@ Function Start-CMClientAction {
 Function Get-CMDeviceCollectionMember {
 
 <#
-    .Discovery
+    .Synopsis
+        Returns a list of members from an SCCM Device Collection.
+    
+    .Description
         Retieves the Members in an SCCM Device Collection.
 
     .Parameter DeviceCollection
         Device collection object.  You can use Get-CMDeviceCollection to get object.
+
+    .Example
+        list the members in the WIN2016 device Collection
+
+        Get-CMDeviceCollection -Name WIN2016 | Get-CMDeviceCollectionMember
+
+    .Notes
+        Author : Jeff Buenting
 
 #>
 

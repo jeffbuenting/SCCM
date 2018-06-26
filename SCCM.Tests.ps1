@@ -49,32 +49,36 @@ InModuleScope $ModuleName {
 
             # ----- Help Tests
             It "has Synopsis Help Section" {
-                { $H.Synopsis } | Should Not BeNullorEmpty
+                 $H.Synopsis  | Should Not BeNullorEmpty
+            }
+
+            It "has Synopsis Help Section that it not start with the command name" {
+                $H.Synopsis | Should Not Match $H.Name
             }
 
             It "has Description Help Section" {
-                { $H.Description } | Should Not BeNullorEmpty
+                 $H.Description | Should Not BeNullorEmpty
             }
 
             It "has Parameters Help Section" {
-                { $H.Parameters } | Should Not BeNullorEmpty
+                 $H.Parameters.parameter.description  | Should Not BeNullorEmpty
             }
 
             # Examples
             it "Example - Count should be greater than 0"{
-                { $H.examples.example } | Measure-Object | Select-Object -ExpandProperty Count | Should BeGreaterthan 0
+                 $H.examples.example  | Measure-Object | Select-Object -ExpandProperty Count | Should BeGreaterthan 0
             }
             
             # Examples - Remarks (small description that comes with the example)
             foreach ($Example in $H.examples.example)
             {
                 it "Example - Remarks on $($Example.Title)"{
-                    { $Example.remarks } | Should not BeNullOrEmpty
+                     $Example.remarks  | Should not BeNullOrEmpty
                 }
             }
 
             It "has Notes Help Section" {
-                { $H.alertSet } | Should Not BeNullorEmpty
+                 $H.alertSet  | Should Not BeNullorEmpty
             }
 
         } 
@@ -115,6 +119,116 @@ InModuleScope $ModuleName {
 
     }
 
-}
 
+
+    #-------------------------------------------------------------------------------------
+
+    Write-Output "`n`n"
+
+    Describe "$ModuleName : Get-CMDeviceCollectionMember" {
+
+        # ----- Get Function Help
+        # ----- Pester to test Comment based help
+        # ----- http://www.lazywinadmin.com/2016/05/using-pester-to-test-your-comment-based.html
+
+        Context "Help" {
+            
+            $H = Help Get-CMDeviceCollectionMember -Full
+
+            # ----- Help Tests
+            It "has Synopsis Help Section" {
+                 $H.Synopsis  | Should Not BeNullorEmpty
+            }
+
+            It "has Synopsis Help Section that it not start with the command name" {
+                $H.Synopsis | Should Not Match $H.Name
+            }
+
+            It "has Description Help Section" {
+                 $H.Description | Should Not BeNullorEmpty
+            }
+
+            It "has Parameters Help Section" {
+                 $H.Parameters.parameter.description  | Should Not BeNullorEmpty
+            }
+
+            # Examples
+            it "Example - Count should be greater than 0"{
+                 $H.examples.example  | Measure-Object | Select-Object -ExpandProperty Count | Should BeGreaterthan 0
+            }
+            
+            # Examples - Remarks (small description that comes with the example)
+            foreach ($Example in $H.examples.example)
+            {
+                it "Example - Remarks on $($Example.Title)"{
+                     $Example.remarks  | Should not BeNullOrEmpty
+                }
+            }
+
+            It "has Notes Help Section" {
+                 $H.alertSet  | Should Not BeNullorEmpty
+            }
+
+        } 
+
+        $Collection = New-Object -TypeName PSObject -Property (@{
+            'CollectionID' = 'AAA0003'
+        })
+
+        Function Get-CMSite {}
+
+        Mock -CommandName Get-CMSite -MockWith {
+            $Obj = New-Object -TypeName PSObject -Property (@{
+                'ServerName' = 'SCCMServer'
+                'SideCode' = 'SCM'
+            })
+
+            Return $Obj
+        }
+
+        Mock -CommandName Get-CimInstance -MockWith {
+            $Obj = New-Object -TypeName PSObject -Property @{
+                'Name'='membername'
+            }
+
+            Return $Obj
+        }
+
+        Context Execution {
+            
+            It 'Should not throw an error if there are no problems' {
+                { $Collection | Get-CMDeviceCollectionMember } | Should Not Throw
+            }
+
+        }
+
+        Context Output {
+            
+            It 'SHould Return a collection membership object' {
+                $Collection | Get-CMDeviceCollectionMember | Should BeofType PSObject
+            }
+
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
 

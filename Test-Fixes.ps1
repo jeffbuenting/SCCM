@@ -5,7 +5,7 @@ $ZipInstalled = @()
 
 $Servers = Get-ADComputer -filter *  -properties OperatingSystem 
 
-#$Servers = Get-ADComputer 'WGPQA1-IIS'
+#$Servers = Get-ADComputer 'SLDemoDC3'
 
 $I = 0
 foreach ( $S in $Servers ) {
@@ -35,7 +35,7 @@ foreach ( $S in $Servers ) {
 
     $ZipInstalled += $Zip
 
-    if ( $ZIP.VersionMajor -lt 18 ) {
+    if ( $ZIP.VersionMajor -lt 18 -and $Zip.VersionMajor -ne $Null ) {
  
         Write-Output "7Zip Installed"
  

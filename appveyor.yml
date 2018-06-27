@@ -27,10 +27,8 @@ test_script:
   - ps: $H | gm
   - ps: Write-Output "====="
   - ps: $H
-  - ps: if ( $H.GetType().Name -eq 'String' ) {
-  - ps: $H -match 'SYNOPSIS[\r\n]+(.*)'
-  - ps:  $HelpObject | Add-Member -MemberType NoteProperty -Name Synopsis -Value $Matches[1].TrimStart( ' ' )
-  - ps: }
+  - ps: Write-Output "====="
+  - ps: if ( $H.GetType().Name -eq 'String' ) {$H -match 'SYNOPSIS[\r\n]+(.*)'; $HelpObject | Add-Member -MemberType NoteProperty -Name Synopsis -Value $Matches[1].TrimStart( ' ' ) }
   - ps: $HelpObject
   - ps: $TestResult = Invoke-Pester -Path "." -OutputFormat NUnitXml -OutputFile TestsResults.xml -PassThru
   - ps: (New-Object 'System.Net.WebClient').UploadFile("https://ci.appveyor.com/api/testresults/nunit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path .\TestsResults.xml))

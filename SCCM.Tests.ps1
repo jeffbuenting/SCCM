@@ -50,6 +50,12 @@ InModuleScope $ModuleName {
             # ----- Appveyor is converting this help to a string.  I don't know why.  SO I have to convert it to an object otherwise the tests will completely fail even if they are true.
             if ( $H.GetType().Name -eq 'String' ) {
     
+                $HelpObject = New-Object -TypeName PSObject
+
+                # ----- Get Name
+                $H -match 'NAME[\r\n]+(.*)'
+                $HelpObject | Add-Member -MemberType NoteProperty -Name Name -Value $Matches[1].TrimStart( ' ' )
+
                 # ----- Get Synopsis
                 $H -match 'SYNOPSIS[\r\n]+(.*)'
                 $HelpObject | Add-Member -MemberType NoteProperty -Name Synopsis -Value $Matches[1].TrimStart( ' ' )
@@ -59,8 +65,21 @@ InModuleScope $ModuleName {
                 $HelpObject | Add-Member -MemberType NoteProperty -Name Description -Value $Matches[1].TrimStart( ' ' )
 
                 # ----- Get Parameters
-                $H -match 'PARAMETERS[\r\n]+(.*)'
-                $HelpObject | Add-Member -MemberType NoteProperty -Name Parameters -Value $Matches[1].TrimStart( ' ' )
+                $H -match 'PARAMETERS[\r\n]+([\-\s\r\n\S]+?(?=[\s\r\n]+<CommonParameters>))'
+                $Parameter = @()
+    
+                $Matches[1] | Foreach {
+                    $P = New-Object -TypeName PSObject -Property (@{
+                        'Parameter' = New-Object -TypeName PSObject -Property (@{
+                            'Description' = $_
+                        })
+                    })
+        
+                    $Parameter += $P
+                }
+
+                $HelpObject | Add-Member -MemberType NoteProperty -Name Parameters -Value $Parameter
+
 
                 # ----- Get Notes
                 $H -match 'NOTES[\s\r\n]+(.*)'
@@ -70,7 +89,13 @@ InModuleScope $ModuleName {
 
                 # ----- Get Examples
                 $H -match '-* EXAMPLE 1 -*[\s\r\n]+(.*)'
-                $HelpObject | Add-Member -MemberType NoteProperty -Name Examples -Value $Matches[1].TrimStart( ' ' )
+                $E = New-Object -TypeName PSObject -Property (@{
+                    'Example' = New-Object -TypeName PSObject -Property (@{
+                        'Remarks' = $Matches[1]
+                    })
+                })
+
+                $HelpObject | Add-Member -MemberType NoteProperty -Name Examples -Value $E
 
 
                 $H = $HelpObject
@@ -162,11 +187,17 @@ InModuleScope $ModuleName {
 
         Context "Help" {
             
-            $H = Help Get-CMDeviceCollectionMember -Full
+            $H = Help Get-CMDeviceCollectionMember -Full | Out-String
 
             # ----- Appveyor is converting this help to a string.  I don't know why.  SO I have to convert it to an object otherwise the tests will completely fail even if they are true.
             if ( $H.GetType().Name -eq 'String' ) {
     
+                $HelpObject = New-Object -TypeName PSObject
+
+                # ----- Get Name
+                $H -match 'NAME[\r\n]+(.*)'
+                $HelpObject | Add-Member -MemberType NoteProperty -Name Name -Value $Matches[1].TrimStart( ' ' )
+
                 # ----- Get Synopsis
                 $H -match 'SYNOPSIS[\r\n]+(.*)'
                 $HelpObject | Add-Member -MemberType NoteProperty -Name Synopsis -Value $Matches[1].TrimStart( ' ' )
@@ -176,8 +207,21 @@ InModuleScope $ModuleName {
                 $HelpObject | Add-Member -MemberType NoteProperty -Name Description -Value $Matches[1].TrimStart( ' ' )
 
                 # ----- Get Parameters
-                $H -match 'PARAMETERS[\r\n]+(.*)'
-                $HelpObject | Add-Member -MemberType NoteProperty -Name Parameters -Value $Matches[1].TrimStart( ' ' )
+                $H -match 'PARAMETERS[\r\n]+([\-\s\r\n\S]+?(?=[\s\r\n]+<CommonParameters>))'
+                $Parameter = @()
+    
+                $Matches[1] | Foreach {
+                    $P = New-Object -TypeName PSObject -Property (@{
+                        'Parameter' = New-Object -TypeName PSObject -Property (@{
+                            'Description' = $_
+                        })
+                    })
+        
+                    $Parameter += $P
+                }
+
+                $HelpObject | Add-Member -MemberType NoteProperty -Name Parameters -Value $Parameter
+
 
                 # ----- Get Notes
                 $H -match 'NOTES[\s\r\n]+(.*)'
@@ -187,7 +231,13 @@ InModuleScope $ModuleName {
 
                 # ----- Get Examples
                 $H -match '-* EXAMPLE 1 -*[\s\r\n]+(.*)'
-                $HelpObject | Add-Member -MemberType NoteProperty -Name Examples -Value $Matches[1].TrimStart( ' ' )
+                $E = New-Object -TypeName PSObject -Property (@{
+                    'Example' = New-Object -TypeName PSObject -Property (@{
+                        'Remarks' = $Matches[1]
+                    })
+                })
+
+                $HelpObject | Add-Member -MemberType NoteProperty -Name Examples -Value $E
 
 
                 $H = $HelpObject

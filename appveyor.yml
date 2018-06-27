@@ -5,16 +5,17 @@
 skip_commits:
   message: /Update Readme and Manifest Version/
 
-environment:
-  access_token:
-    secure: EJ2HHF0klBsYS3WlZWIvcc88u5/gixju8bcOR4d13x6Fh+BA7UNU89/NPkHYP6JN
-
 # branches to build
 branches:
   # whitelist
   only:
     - master
 
+environment:
+  access_token:
+    secure: EJ2HHF0klBsYS3WlZWIvcc88u5/gixju8bcOR4d13x6Fh+BA7UNU89/NPkHYP6JN
+
+image: Visual Studio 2017
     
 install:
   - choco install pester

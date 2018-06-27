@@ -26,7 +26,7 @@ test_script:
   - ps: $H = help start-cmclientaction -full
   - ps: $H | gm
   - ps: Write-Output "====="
-  - ps: $H.synopsis
+  - ps: $H
   - ps: $TestResult = Invoke-Pester -Path "." -OutputFormat NUnitXml -OutputFile TestsResults.xml -PassThru
   - ps: (New-Object 'System.Net.WebClient').UploadFile("https://ci.appveyor.com/api/testresults/nunit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path .\TestsResults.xml))
   - ps: if ($TestResult.FailedCount -gt 0) { throw "$($Test.FailedCount) tests failed."}

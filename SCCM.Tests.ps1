@@ -47,6 +47,35 @@ InModuleScope $ModuleName {
             
             $H = Help Start-CMClientAction -Full
 
+            # ----- Appveyor is converting this help to a string.  I don't know why.  SO I have to convert it to an object otherwise the tests will completely fail even if they are true.
+            if ( $H.GetType().Name -eq 'String' ) {
+    
+                # ----- Get Synopsis
+                $H -match 'SYNOPSIS[\r\n]+(.*)'
+                $HelpObject | Add-Member -MemberType NoteProperty -Name Synopsis -Value $Matches[1].TrimStart( ' ' )
+
+                # ----- Get Description
+                $H -match 'DESCRIPTION[\r\n]+(.*)'
+                $HelpObject | Add-Member -MemberType NoteProperty -Name Description -Value $Matches[1].TrimStart( ' ' )
+
+                # ----- Get Parameters
+                $H -match 'PARAMETERS[\r\n]+(.*)'
+                $HelpObject | Add-Member -MemberType NoteProperty -Name Parameters -Value $Matches[1].TrimStart( ' ' )
+
+                # ----- Get Notes
+                $H -match 'NOTES[\s\r\n]+(.*)'
+                $HelpObject | Add-Member -MemberType NoteProperty -Name Alertset -Value $Matches[1].TrimStart( ' ' )
+
+                $Matches
+
+                # ----- Get Examples
+                $H -match '-* EXAMPLE 1 -*[\s\r\n]+(.*)'
+                $HelpObject | Add-Member -MemberType NoteProperty -Name Examples -Value $Matches[1].TrimStart( ' ' )
+
+
+                $H = $HelpObject
+            }
+
             # ----- Help Tests
             It "has Synopsis Help Section" {
                  $H.Synopsis  | Should Not BeNullorEmpty
@@ -134,6 +163,35 @@ InModuleScope $ModuleName {
         Context "Help" {
             
             $H = Help Get-CMDeviceCollectionMember -Full
+
+            # ----- Appveyor is converting this help to a string.  I don't know why.  SO I have to convert it to an object otherwise the tests will completely fail even if they are true.
+            if ( $H.GetType().Name -eq 'String' ) {
+    
+                # ----- Get Synopsis
+                $H -match 'SYNOPSIS[\r\n]+(.*)'
+                $HelpObject | Add-Member -MemberType NoteProperty -Name Synopsis -Value $Matches[1].TrimStart( ' ' )
+
+                # ----- Get Description
+                $H -match 'DESCRIPTION[\r\n]+(.*)'
+                $HelpObject | Add-Member -MemberType NoteProperty -Name Description -Value $Matches[1].TrimStart( ' ' )
+
+                # ----- Get Parameters
+                $H -match 'PARAMETERS[\r\n]+(.*)'
+                $HelpObject | Add-Member -MemberType NoteProperty -Name Parameters -Value $Matches[1].TrimStart( ' ' )
+
+                # ----- Get Notes
+                $H -match 'NOTES[\s\r\n]+(.*)'
+                $HelpObject | Add-Member -MemberType NoteProperty -Name Alertset -Value $Matches[1].TrimStart( ' ' )
+
+                $Matches
+
+                # ----- Get Examples
+                $H -match '-* EXAMPLE 1 -*[\s\r\n]+(.*)'
+                $HelpObject | Add-Member -MemberType NoteProperty -Name Examples -Value $Matches[1].TrimStart( ' ' )
+
+
+                $H = $HelpObject
+            }
 
             # ----- Help Tests
             It "has Synopsis Help Section" {

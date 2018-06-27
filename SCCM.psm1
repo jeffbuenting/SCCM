@@ -333,14 +333,24 @@ Function Set-CMBaselineFromSUG {
 Function Get-SCCMSoftwareUpdate {
 
 <#
+    .Synopsis
+        Retrieves a list of Software Update objects.
+
     .Description
         Gets SCCM Software Update Informatlion
 
     .Parameter ArticleID
         Software Update Article ID.
 
-    .Note
+    .Example
+        retrieve software updates with article ID 4288415
+        
+        Get-SCCMSoftwareUpdate -ArticleID 4288415
+
+    .Notes
         This is actually different from the built in Get-CMSoftwareUpdate.  The data retrieved is different.
+
+        Author : Jeff Buenting
 #>
 
     [CmdletBinding()]
@@ -350,20 +360,42 @@ Function Get-SCCMSoftwareUpdate {
     )
 
     Begin {
-        Write-Verbose "Getting Site Info"
-        $Site = Get-CMSite
+        Try {
+            Write-Verbose "Getting Site Info"
+            $Site = Get-CMSite -ErrorAction Stop
+        }
+        Catch {
+            $EXceptionMessage = $_.Exception.Message
+            $ExceptionType = $_.exception.GetType().fullname
+            Throw "Get-SCCMSoftwareUpdate : Error retrieving the Configuration Manager Site Code.`n`n     $ExceptionMessage`n`n     Exception : $ExceptionType"  
+        }
     }
 
     Process {
         If ( [String]::IsNullOrEmpty($ArticleID) ) {
+            Try {
                 Write-Verbose "Returning all Updates"
-                Write-Output (Get-CIMInstance -ComputerName $Site.ServerName -Namespace "root\sms\site_$($Site.SiteCode)" -Class 'SMS_SoftwareUpdate' )
+                Write-Output (Get-CIMInstance -ComputerName $Site.ServerName -Namespace "root\sms\site_$($Site.SiteCode)" -ClassName 'SMS_SoftwareUpdate' -ErrorAction Stop )
             }
+            Catch {
+                $EXceptionMessage = $_.Exception.Message
+                $ExceptionType = $_.exception.GetType().fullname
+                Throw "Get-SCCMSoftwareUpdate : Error retrieving ALL software updates.`n`n     $ExceptionMessage`n`n     Exception : $ExceptionType"  
+            }
+        }
+        Else {    
             ForEach ( $A in $ArticleID ) {
-                Write-Verbose "Retrieving software update: $A"
+                Try {
+                    Write-Verbose "Retrieving software update: $A"
                        
-                Write-Output (Get-CIMInstance -ComputerName $Site.ServerName -Namespace "root\sms\site_$($Site.SiteCode)" -Class 'SMS_SoftwareUpdate' -Filter "ArticleID = $A")
-            
+                    Write-Output (Get-CIMInstance -ComputerName $Site.ServerName -Namespace "root\sms\site_$($Site.SiteCode)" -ClassName 'SMS_SoftwareUpdate' -Filter "ArticleID = $A" -ErrorAction Stop) 
+                }
+                Catch {
+                    $EXceptionMessage = $_.Exception.Message
+                    $ExceptionType = $_.exception.GetType().fullname
+                    Throw "Get-SCCMSoftwareUpdate : Error retrieving the software update - $A.`n`n     $ExceptionMessage`n`n     Exception : $ExceptionType"  
+                }
+            }
         }
     }
 }

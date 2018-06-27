@@ -422,13 +422,361 @@ InModuleScope $ModuleName {
         }
     } 
 
+    #-------------------------------------------------------------------------------------
 
+    Write-Output "`n`n"
 
+    Describe "$ModuleName : Get-SCCMSoftwareUpdateMemberof" {
+        
+        # ----- Get Function Help
+        # ----- Pester to test Comment based help
+        # ----- http://www.lazywinadmin.com/2016/05/using-pester-to-test-your-comment-based.html
 
+        Context "Help" {
+            
+            $H = Get-Help Set-CMBaselineFromSUG -Full 
 
+            # ----- Help Tests
+            It "has Synopsis Help Section" {
+                 $H.Synopsis  | Should Not BeNullorEmpty
+            } -Pending 
 
+            It "has Synopsis Help Section that it not start with the command name" {
+                $H.Synopsis | Should Not Match $H.Name
+            } -Pending
 
+            It "has Description Help Section" {
+                 $H.Description | Should Not BeNullorEmpty
+            } -Pending
 
+            It "has Parameters Help Section" {
+                 $H.Parameters.parameter.description  | Should Not BeNullorEmpty
+            } -Pending
 
+            # Examples
+            it "Example - Count should be greater than 0"{
+                 $H.examples.example  | Measure-Object | Select-Object -ExpandProperty Count | Should BeGreaterthan 0
+            } -Pending
+            
+            # Examples - Remarks (small description that comes with the example)
+            foreach ($Example in $H.examples.example)
+            {
+                it "Example - Remarks on $($Example.Title)"{
+                     $Example.remarks  | Should not BeNullOrEmpty
+                } -Pending
+            } 
+
+            It "has Notes Help Section" {
+                 $H.alertSet  | Should Not BeNullorEmpty
+            } -Pending
+
+        } 
+    } 
+
+    #-------------------------------------------------------------------------------------
+
+    Write-Output "`n`n"
+
+    Describe "$ModuleName : Remove-SCCMSoftwareUpdateFromGroup" {
+        
+        # ----- Get Function Help
+        # ----- Pester to test Comment based help
+        # ----- http://www.lazywinadmin.com/2016/05/using-pester-to-test-your-comment-based.html
+
+        Context "Help" {
+            
+            $H = Get-Help Remove-SCCMSoftwareUpdateFromGroup -Full 
+
+            # ----- Help Tests
+            It "has Synopsis Help Section" {
+                 $H.Synopsis  | Should Not BeNullorEmpty
+            } 
+
+            It "has Synopsis Help Section that it not start with the command name" {
+                $H.Synopsis | Should Not Match $H.Name
+            } 
+
+            It "has Description Help Section" {
+                 $H.Description | Should Not BeNullorEmpty
+            } 
+
+            It "has Parameters Help Section" {
+                 $H.Parameters.parameter.description  | Should Not BeNullorEmpty
+            } 
+
+            # Examples
+            it "Example - Count should be greater than 0"{
+                 $H.examples.example  | Measure-Object | Select-Object -ExpandProperty Count | Should BeGreaterthan 0
+            } 
+            
+            # Examples - Remarks (small description that comes with the example)
+            foreach ($Example in $H.examples.example)
+            {
+                it "Example - Remarks on $($Example.Title)"{
+                     $Example.remarks  | Should not BeNullOrEmpty
+                } 
+            } 
+
+            It "has Notes Help Section" {
+                 $H.alertSet  | Should Not BeNullorEmpty
+            } 
+
+        } 
+    } 
+
+    #-------------------------------------------------------------------------------------
+
+    Write-Output "`n`n"
+
+    Describe "$ModuleName : Remove-SCCMSoftwareUpdateFromDeploymentPackage" {
+        
+        # ----- Get Function Help
+        # ----- Pester to test Comment based help
+        # ----- http://www.lazywinadmin.com/2016/05/using-pester-to-test-your-comment-based.html
+
+        Context "Help" {
+            
+            $H = Get-Help Remove-SCCMSoftwareUpdateFromDeploymentPackage -Full 
+
+            # ----- Help Tests
+            It "has Synopsis Help Section" {
+                 $H.Synopsis  | Should Not BeNullorEmpty
+            } 
+
+            It "has Synopsis Help Section that it not start with the command name" {
+                $H.Synopsis | Should Not Match $H.Name
+            } 
+
+            It "has Description Help Section" {
+                 $H.Description | Should Not BeNullorEmpty
+            } 
+
+            It "has Parameters Help Section" {
+                 $H.Parameters.parameter.description  | Should Not BeNullorEmpty
+            } 
+
+            # Examples
+            it "Example - Count should be greater than 0"{
+                 $H.examples.example  | Measure-Object | Select-Object -ExpandProperty Count | Should BeGreaterthan 0
+            } 
+            
+            # Examples - Remarks (small description that comes with the example)
+            foreach ($Example in $H.examples.example)
+            {
+                it "Example - Remarks on $($Example.Title)"{
+                     $Example.remarks  | Should not BeNullOrEmpty
+                } 
+            } 
+
+            It "has Notes Help Section" {
+                 $H.alertSet  | Should Not BeNullorEmpty
+            } 
+
+        } 
+    }
+
+    #-------------------------------------------------------------------------------------
+
+    Write-Output "`n`n"
+
+    Describe "$ModuleName : Refresh-SCCMSoftwareUpdateDeploymentPackage" {
+        
+        # ----- Get Function Help
+        # ----- Pester to test Comment based help
+        # ----- http://www.lazywinadmin.com/2016/05/using-pester-to-test-your-comment-based.html
+
+        Context "Help" {
+            
+            $H = Get-Help Refresh-SCCMSoftwareUpdateDeploymentPackage -Full 
+
+            # ----- Help Tests
+            It "has Synopsis Help Section" {
+                 $H.Synopsis  | Should Not BeNullorEmpty
+            } 
+
+            It "has Synopsis Help Section that it not start with the command name" {
+                $H.Synopsis | Should Not Match $H.Name
+            } 
+
+            It "has Description Help Section" {
+                 $H.Description | Should Not BeNullorEmpty
+            } 
+
+            It "has Parameters Help Section" {
+                 $H.Parameters.parameter.description  | Should Not BeNullorEmpty
+            } 
+
+            # Examples
+            it "Example - Count should be greater than 0"{
+                 $H.examples.example  | Measure-Object | Select-Object -ExpandProperty Count | Should BeGreaterthan 0
+            } 
+            
+            # Examples - Remarks (small description that comes with the example)
+            foreach ($Example in $H.examples.example)
+            {
+                it "Example - Remarks on $($Example.Title)"{
+                     $Example.remarks  | Should not BeNullOrEmpty
+                } 
+            } 
+
+            It "has Notes Help Section" {
+                 $H.alertSet  | Should Not BeNullorEmpty
+            } 
+
+        } 
+    }
+
+    #-------------------------------------------------------------------------------------
+
+    Write-Output "`n`n"
+
+    Describe "$ModuleName : Get-SCCMSoftwareUpdateDeploymentPackageUpdateSourcePath" {
+        
+        # ----- Get Function Help
+        # ----- Pester to test Comment based help
+        # ----- http://www.lazywinadmin.com/2016/05/using-pester-to-test-your-comment-based.html
+
+        Context "Help" {
+            
+            $H = Get-Help Get-SCCMSoftwareUpdateDeploymentPackageUpdateSourcePath -Full 
+
+            # ----- Help Tests
+            It "has Synopsis Help Section" {
+                 $H.Synopsis  | Should Not BeNullorEmpty
+            } 
+
+            It "has Synopsis Help Section that it not start with the command name" {
+                $H.Synopsis | Should Not Match $H.Name
+            } 
+
+            It "has Description Help Section" {
+                 $H.Description | Should Not BeNullorEmpty
+            } 
+
+            It "has Parameters Help Section" {
+                 $H.Parameters.parameter.description  | Should Not BeNullorEmpty
+            } 
+
+            # Examples
+            it "Example - Count should be greater than 0"{
+                 $H.examples.example  | Measure-Object | Select-Object -ExpandProperty Count | Should BeGreaterthan 0
+            } 
+            
+            # Examples - Remarks (small description that comes with the example)
+            foreach ($Example in $H.examples.example)
+            {
+                it "Example - Remarks on $($Example.Title)"{
+                     $Example.remarks  | Should not BeNullOrEmpty
+                } 
+            } 
+
+            It "has Notes Help Section" {
+                 $H.alertSet  | Should Not BeNullorEmpty
+            } 
+
+        } 
+    }
+
+    #-------------------------------------------------------------------------------------
+
+    Write-Output "`n`n"
+
+    Describe "$ModuleName : Add-SCCMUpdateToDeploymentPackage" {
+        
+        # ----- Get Function Help
+        # ----- Pester to test Comment based help
+        # ----- http://www.lazywinadmin.com/2016/05/using-pester-to-test-your-comment-based.html
+
+        Context "Help" {
+            
+            $H = Get-Help Add-SCCMUpdateToDeploymentPackage -Full 
+
+            # ----- Help Tests
+            It "has Synopsis Help Section" {
+                 $H.Synopsis  | Should Not BeNullorEmpty
+            } 
+
+            It "has Synopsis Help Section that it not start with the command name" {
+                $H.Synopsis | Should Not Match $H.Name
+            } 
+
+            It "has Description Help Section" {
+                 $H.Description | Should Not BeNullorEmpty
+            } 
+
+            It "has Parameters Help Section" {
+                 $H.Parameters.parameter.description  | Should Not BeNullorEmpty
+            } 
+
+            # Examples
+            it "Example - Count should be greater than 0"{
+                 $H.examples.example  | Measure-Object | Select-Object -ExpandProperty Count | Should BeGreaterthan 0
+            } 
+            
+            # Examples - Remarks (small description that comes with the example)
+            foreach ($Example in $H.examples.example)
+            {
+                it "Example - Remarks on $($Example.Title)"{
+                     $Example.remarks  | Should not BeNullOrEmpty
+                } 
+            } 
+
+            It "has Notes Help Section" {
+                 $H.alertSet  | Should Not BeNullorEmpty
+            } 
+
+        } 
+    }
+
+    #-------------------------------------------------------------------------------------
+
+    Write-Output "`n`n"
+
+    Describe "$ModuleName : Clear-SCCMClientCache" {
+        
+        # ----- Get Function Help
+        # ----- Pester to test Comment based help
+        # ----- http://www.lazywinadmin.com/2016/05/using-pester-to-test-your-comment-based.html
+
+        Context "Help" {
+            
+            $H = Get-Help Clear-SCCMClientCache -Full 
+
+            # ----- Help Tests
+            It "has Synopsis Help Section" {
+                 $H.Synopsis  | Should Not BeNullorEmpty
+            } 
+
+            It "has Synopsis Help Section that it not start with the command name" {
+                $H.Synopsis | Should Not Match $H.Name
+            } 
+
+            It "has Description Help Section" {
+                 $H.Description | Should Not BeNullorEmpty
+            } 
+
+            It "has Parameters Help Section" {
+                 $H.Parameters.parameter.description  | Should Not BeNullorEmpty
+            } 
+
+            # Examples
+            it "Example - Count should be greater than 0"{
+                 $H.examples.example  | Measure-Object | Select-Object -ExpandProperty Count | Should BeGreaterthan 0
+            } 
+            
+            # Examples - Remarks (small description that comes with the example)
+            foreach ($Example in $H.examples.example)
+            {
+                it "Example - Remarks on $($Example.Title)"{
+                     $Example.remarks  | Should not BeNullOrEmpty
+                } 
+            } 
+
+            It "has Notes Help Section" {
+                 $H.alertSet  | Should Not BeNullorEmpty
+            } 
+
+        } 
+    }
 }
 

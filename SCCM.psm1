@@ -722,7 +722,7 @@ Function Refresh-SCCMSoftwareUpdateDeploymentPackage {
 
         Refresh-SCCMSoftwareUpdateDeploymentPackage -DeploymentPackageName Test
 
-    .Note
+    .Notes
         Author : Jeff Buenting
         Date : 2017 May 09
 #>
@@ -844,7 +844,7 @@ Function Add-SCCMUpdateToDeploymentPackage {
     .Description
         Sometimes you might want to move the software updates between software update Deployment packages.  Since the update has already been downloaded, this function will add it to a second deploymen package.
 
-    .Parameter SoftwareUpdate
+        .Parameter SoftwareUpdate
         This is an SCCM Software Update object to be added to the Deployment Package.
 
     .Parameter DeploymentPackageName
@@ -855,13 +855,13 @@ Function Add-SCCMUpdateToDeploymentPackage {
 
         This cannot be the same path as another Deployment Package.
 
-    .Paramete SiteServer
+    .Parameter SiteServer
         SCCM Site Server.
 
     .Parameter Refresh
         including this switch will refresh the software update deployment package on the deployment point.  For efficiency sake it may be better to do a refresh after all changes have been made.
-
-    Example
+    
+    .Example
         Gets a list of updates from a software Update Group.  "Downloads" the updates to a temporary location and adds them to the software update deploymnet package
 
         $Updates = Get-CMSoftwareUpdate -UpdateGroupName Patches -Fast
@@ -894,7 +894,7 @@ Function Add-SCCMUpdateToDeploymentPackage {
             Foreach ( $P in $Path ) { Remove-Item -Path $P -Recurse -Force }
         }
 
-    .Links
+    .Link
         https://www.petervanderwoude.nl/post/add-update-content-to-a-deployment-package-via-powershell-in-configmgr-2012/
 
     .Notes
@@ -980,7 +980,7 @@ Function Clear-SCCMClientCache {
     .Link
         http://myitforum.com/myitforumwp/2011/11/10/how-to-properly-remove-items-from-configmgr-client-cache-using-powershell-and-vbscript/
 
-    .Note
+    .Notes
         Author : Jeff Buenting
         Date : 2016 NOV 21
 #>

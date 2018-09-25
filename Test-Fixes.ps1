@@ -1,11 +1,11 @@
 ﻿$NoSession = @()
 $ZipInstalled = @()
 
-#$Servers = Get-ADComputer -LDAPFilter "(&(objectcategory=computer)(OperatingSystem=*server*))" -properties OperatingSystem #| where Name -Like QA3*
+$Servers = Get-ADComputer -LDAPFilter "(&(objectcategory=computer)(OperatingSystem=*server*))" -properties OperatingSystem #| where Name -Like QA3*
 
-$Servers = Get-ADComputer -filter *  -properties OperatingSystem 
+#$Servers = Get-ADComputer -filter *  -properties OperatingSystem 
 
-#$Servers = Get-ADComputer 'SLDemoDC3'
+#$Servers = Get-ADComputer 'JB-CRM02'
 
 $I = 0
 foreach ( $S in $Servers ) {
@@ -21,52 +21,37 @@ foreach ( $S in $Servers ) {
         Continue
     }
 
-    # ----- See if 7zip is installed
-    $Zip = invoke-command -Session $Session -ScriptBlock {
+    
+    invoke-command -Session $Session -ScriptBlock {
         # ----- Payload
-                
-        $App = Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* -ErrorAction SilentlyContinue | ?{$_.DisplayName -like "7-Zip*"} 
+        
+# ----- Creates registry entries to enable Spectre CVE-2017-5715_5753_5754
+# https://support.microsoft.com/en-us/help/4072698/windows-server-guidance-to-protect-against-the-speculative-execution
+# ----- Requires Monthly Cumulative rollups
 
-        Write-Output ( $App | Select-Object *,@{N='ComputerName';E={$env:COMPUTERNAME}})
+if ( -Not ( Get-Item -Path 'HKLM:SOFTWARE\Microsoft\Windows NT\CurrentVersion\Virtualization' -ErrorAction SilentlyContinue ) ) {
+    New-Item -Path 'HKLM:SOFTWARE\Microsoft\Windows NT\CurrentVersion\Virtualization'
+}
+    
+# ----- Create entry
+if ( -Not ( Get-Item -Path 'HKLM:SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\FeatureSettingsOverride' -ErrorAction SilentlyContinue ) ) {
+    Set-ItemProperty -Path 'HKLM:SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management' -Name FeatureSettingsOverride -type DWORD -Value 0
+}
+
+if ( -Not ( Get-Item -Path 'HKLM:SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\FeatureSettingsOverrideMask' -ErrorAction SilentlyContinue ) ) {
+    Set-ItemProperty -Path 'HKLM:SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management' -Name FeatureSettingsOverrideMask -type DWORD -Value 3
+}
+
+if ( -Not ( Get-Item -Path 'HKLM:SOFTWARE\Microsoft\Windows NT\CurrentVersion\Virtualization\MinVmVersionForCpuBasedMitigations' -ErrorAction SilentlyContinue ) ) {
+    Write-output 'One'
+    Set-ItemProperty -Path 'HKLM:SOFTWARE\Microsoft\Windows NT\CurrentVersion\Virtualization' -Name MinVmVersionForCpuBasedMitigations -Value '1.0' 
+}
 
 
         # ----- End Payload
     }
 
-    $ZipInstalled += $Zip
-
-    if ( $ZIP.VersionMajor -lt 18 -and $Zip.VersionMajor -ne $Null ) {
- 
-        Write-Output "7Zip Installed"
- 
-        # ----- Copy 7zip locally to avoid the double hop issue
-        if ( -Not ( Test-path -Path "\\$($S.Name)\c$\Temp" ) ) { New-Item -Path "\\$($S.Name)\c$\Temp" -ItemType Directory }
- 
-        copy-item F:\temp\7z1805-x64.msi -Destination "\\$($S.Name)\c$\Temp" -Force
- 
- 
-        invoke-command -Session $Session -ArgumentList $Zip -ScriptBlock {
-            Param ( $ZIPApp )
-            # ----- Payload
-          
-            if ( $ZipApp.UninstallString -eq 'C:\Program Files\7-Zip\Uninstall.exe' ) {
-                Write-Output "Uninstalling with Uninstall.exe"
-                Start-Process -FilePath $ZIPApp.UninstallString -ArgumentList '/S' -Wait -Verb RunAs
-            }
-            Else {
-               Write-Output "Uninstalling with MSIExec"
-               $Guid = $ZipApp.PSChildName          
- 
-               start-process C:\windows\System32\msiexec.exe -ArgumentList "/X $Guid /qn /norestart" -Wait -Verb RunAs
- 
-            }
-         
-            Write-Output "Installing 7Zip"
-            start-process C:\windows\System32\msiexec.exe -ArgumentList '/i c:\temp\7z1805-x64.msi /q /norestart' -wait -verb RunAs
-            
-            # ----- End Payload
-        }
-    }
+    
 
     
 

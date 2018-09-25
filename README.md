@@ -4,7 +4,7 @@ SCCM module
 
 ### Master
 
-Version: 2.0.33
+Version: 2.0.34
 
 [![Build status](https://ci.appveyor.com/api/projects/status/wuoqifxpfkpouebu/branch/master?svg=true)](https://ci.appveyor.com/project/jeffbuenting/sccm/branch/master)
 

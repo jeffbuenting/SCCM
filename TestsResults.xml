@@ -1,216 +1,216 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
-<test-results xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="nunit_schema_2.5.xsd" name="Pester" total="93" errors="0" failures="0" not-run="0" inconclusive="12" ignored="0" skipped="0" invalid="0" date="2018-06-27" time="12:32:14">
+<test-results xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="nunit_schema_2.5.xsd" name="Pester" total="93" errors="0" failures="0" not-run="0" inconclusive="12" ignored="0" skipped="0" invalid="0" date="2018-09-25" time="14:44:38">
   <environment user="appveyor" machine-name="APPVYR-WIN" cwd="C:\projects\sccm" user-domain="APPVYR-WIN" platform="Microsoft Windows Server 2016 Datacenter|C:\Windows|\Device\Harddisk0\Partition4" nunit-version="2.5.8.0" os-version="10.0.14393" clr-version="4.0.30319.42000" />
   <culture-info current-culture="en-US" current-uiculture="en-US" />
-  <test-suite type="TestFixture" name="Pester" executed="True" result="Inconclusive" success="True" time="5.5196" asserts="0" description="Pester">
+  <test-suite type="TestFixture" name="Pester" executed="True" result="Inconclusive" success="True" time="4.5001" asserts="0" description="Pester">
     <results>
-      <test-suite type="TestFixture" name="C:\projects\sccm\SCCM.Tests.ps1" executed="True" result="Inconclusive" success="True" time="5.5196" asserts="0" description="C:\projects\sccm\SCCM.Tests.ps1">
+      <test-suite type="TestFixture" name="C:\projects\sccm\SCCM.Tests.ps1" executed="True" result="Inconclusive" success="True" time="4.5001" asserts="0" description="C:\projects\sccm\SCCM.Tests.ps1">
         <results>
-          <test-suite type="TestFixture" name="sccm : Module Tests" executed="True" result="Success" success="True" time="1.6471" asserts="0" description="sccm : Module Tests">
+          <test-suite type="TestFixture" name="sccm : Module Tests" executed="True" result="Success" success="True" time="1.1675" asserts="0" description="sccm : Module Tests">
             <results>
-              <test-case description="should have a test for each function" name="sccm : Module Tests.should have a test for each function" time="1.6471" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="should have a test for each function" name="sccm : Module Tests.should have a test for each function" time="1.1675" asserts="0" success="True" result="Success" executed="True" />
             </results>
           </test-suite>
-          <test-suite type="TestFixture" name="sccm : Start-CMClientAction" executed="True" result="Success" success="True" time="1.2476" asserts="0" description="sccm : Start-CMClientAction">
+          <test-suite type="TestFixture" name="sccm : Start-CMClientAction" executed="True" result="Success" success="True" time="1.2277" asserts="0" description="sccm : Start-CMClientAction">
             <results>
-              <test-suite type="TestFixture" name="Help" executed="True" result="Success" success="True" time="0.5142" asserts="0" description="Help">
+              <test-suite type="TestFixture" name="Help" executed="True" result="Success" success="True" time="0.502" asserts="0" description="Help">
                 <results>
-                  <test-case description="has Synopsis Help Section" name="sccm : Start-CMClientAction.Help.has Synopsis Help Section" time="0.3005" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="has Synopsis Help Section that it not start with the command name" name="sccm : Start-CMClientAction.Help.has Synopsis Help Section that it not start with the command name" time="0.0218" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="has Description Help Section" name="sccm : Start-CMClientAction.Help.has Description Help Section" time="0.0171" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="has Parameters Help Section" name="sccm : Start-CMClientAction.Help.has Parameters Help Section" time="0.0121" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="Example - Count should be greater than 0" name="sccm : Start-CMClientAction.Help.Example - Count should be greater than 0" time="0.1262" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="Example - Remarks on -------------------------- EXAMPLE 1 --------------------------" name="sccm : Start-CMClientAction.Help.Example - Remarks on -------------------------- EXAMPLE 1 --------------------------" time="0.0254" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="has Notes Help Section" name="sccm : Start-CMClientAction.Help.has Notes Help Section" time="0.0111" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="has Synopsis Help Section" name="sccm : Start-CMClientAction.Help.has Synopsis Help Section" time="0.3229" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="has Synopsis Help Section that it not start with the command name" name="sccm : Start-CMClientAction.Help.has Synopsis Help Section that it not start with the command name" time="0.0293" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="has Description Help Section" name="sccm : Start-CMClientAction.Help.has Description Help Section" time="0.0253" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="has Parameters Help Section" name="sccm : Start-CMClientAction.Help.has Parameters Help Section" time="0.0133" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="Example - Count should be greater than 0" name="sccm : Start-CMClientAction.Help.Example - Count should be greater than 0" time="0.0792" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="Example - Remarks on -------------------------- EXAMPLE 1 --------------------------" name="sccm : Start-CMClientAction.Help.Example - Remarks on -------------------------- EXAMPLE 1 --------------------------" time="0.0122" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="has Notes Help Section" name="sccm : Start-CMClientAction.Help.has Notes Help Section" time="0.0199" asserts="0" success="True" result="Success" executed="True" />
                 </results>
               </test-suite>
-              <test-suite type="TestFixture" name="Execution" executed="True" result="Success" success="True" time="0.7335" asserts="0" description="Execution">
+              <test-suite type="TestFixture" name="Execution" executed="True" result="Success" success="True" time="0.7257" asserts="0" description="Execution">
                 <results>
-                  <test-case description="Should work with single computername as Input" name="sccm : Start-CMClientAction.Execution.Should work with single computername as Input" time="0.6436" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="Should work with array of computernames passed in" name="sccm : Start-CMClientAction.Execution.Should work with array of computernames passed in" time="0.0338" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="Should work with Pipeline Input" name="sccm : Start-CMClientAction.Execution.Should work with Pipeline Input" time="0.0561" asserts="0" success="True" result="Success" executed="True" />
-                </results>
-              </test-suite>
-            </results>
-          </test-suite>
-          <test-suite type="TestFixture" name="sccm : Get-CMDeviceCollectionMember" executed="True" result="Success" success="True" time="0.4493" asserts="0" description="sccm : Get-CMDeviceCollectionMember">
-            <results>
-              <test-suite type="TestFixture" name="Help" executed="True" result="Success" success="True" time="0.2265" asserts="0" description="Help">
-                <results>
-                  <test-case description="has Synopsis Help Section" name="sccm : Get-CMDeviceCollectionMember.Help.has Synopsis Help Section" time="0.1688" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="has Synopsis Help Section that it not start with the command name" name="sccm : Get-CMDeviceCollectionMember.Help.has Synopsis Help Section that it not start with the command name" time="0.0073" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="has Description Help Section" name="sccm : Get-CMDeviceCollectionMember.Help.has Description Help Section" time="0.007" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="has Parameters Help Section" name="sccm : Get-CMDeviceCollectionMember.Help.has Parameters Help Section" time="0.0232" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="Example - Count should be greater than 0" name="sccm : Get-CMDeviceCollectionMember.Help.Example - Count should be greater than 0" time="0.007" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="Example - Remarks on -------------------------- EXAMPLE 1 --------------------------" name="sccm : Get-CMDeviceCollectionMember.Help.Example - Remarks on -------------------------- EXAMPLE 1 --------------------------" time="0.0067" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="has Notes Help Section" name="sccm : Get-CMDeviceCollectionMember.Help.has Notes Help Section" time="0.0066" asserts="0" success="True" result="Success" executed="True" />
-                </results>
-              </test-suite>
-              <test-suite type="TestFixture" name="Execution" executed="True" result="Success" success="True" time="0.1659" asserts="0" description="Execution">
-                <results>
-                  <test-case description="Should not throw an error if there are no problems" name="sccm : Get-CMDeviceCollectionMember.Execution.Should not throw an error if there are no problems" time="0.1659" asserts="0" success="True" result="Success" executed="True" />
-                </results>
-              </test-suite>
-              <test-suite type="TestFixture" name="Output" executed="True" result="Success" success="True" time="0.0569" asserts="0" description="Output">
-                <results>
-                  <test-case description="SHould Return a collection membership object" name="sccm : Get-CMDeviceCollectionMember.Output.SHould Return a collection membership object" time="0.0569" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="Should work with single computername as Input" name="sccm : Start-CMClientAction.Execution.Should work with single computername as Input" time="0.6628" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="Should work with array of computernames passed in" name="sccm : Start-CMClientAction.Execution.Should work with array of computernames passed in" time="0.0355" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="Should work with Pipeline Input" name="sccm : Start-CMClientAction.Execution.Should work with Pipeline Input" time="0.0274" asserts="0" success="True" result="Success" executed="True" />
                 </results>
               </test-suite>
             </results>
           </test-suite>
-          <test-suite type="TestFixture" name="sccm : Set-CMBaselineFromSUG" executed="True" result="Inconclusive" success="True" time="0.0639" asserts="0" description="sccm : Set-CMBaselineFromSUG">
+          <test-suite type="TestFixture" name="sccm : Get-CMDeviceCollectionMember" executed="True" result="Success" success="True" time="0.5162" asserts="0" description="sccm : Get-CMDeviceCollectionMember">
             <results>
-              <test-suite type="TestFixture" name="Help" executed="True" result="Inconclusive" success="True" time="0.0639" asserts="0" description="Help">
+              <test-suite type="TestFixture" name="Help" executed="True" result="Success" success="True" time="0.2801" asserts="0" description="Help">
                 <results>
-                  <test-case description="has Synopsis Help Section" name="sccm : Set-CMBaselineFromSUG.Help.has Synopsis Help Section" time="0.0477" asserts="0" success="True" result="Inconclusive" executed="True" />
-                  <test-case description="has Synopsis Help Section that it not start with the command name" name="sccm : Set-CMBaselineFromSUG.Help.has Synopsis Help Section that it not start with the command name" time="0.0044" asserts="0" success="True" result="Inconclusive" executed="True" />
-                  <test-case description="has Description Help Section" name="sccm : Set-CMBaselineFromSUG.Help.has Description Help Section" time="0.0024" asserts="0" success="True" result="Inconclusive" executed="True" />
-                  <test-case description="has Parameters Help Section" name="sccm : Set-CMBaselineFromSUG.Help.has Parameters Help Section" time="0.0022" asserts="0" success="True" result="Inconclusive" executed="True" />
-                  <test-case description="Example - Count should be greater than 0" name="sccm : Set-CMBaselineFromSUG.Help.Example - Count should be greater than 0" time="0.0023" asserts="0" success="True" result="Inconclusive" executed="True" />
-                  <test-case description="has Notes Help Section" name="sccm : Set-CMBaselineFromSUG.Help.has Notes Help Section" time="0.0048" asserts="0" success="True" result="Inconclusive" executed="True" />
+                  <test-case description="has Synopsis Help Section" name="sccm : Get-CMDeviceCollectionMember.Help.has Synopsis Help Section" time="0.2238" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="has Synopsis Help Section that it not start with the command name" name="sccm : Get-CMDeviceCollectionMember.Help.has Synopsis Help Section that it not start with the command name" time="0.0097" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="has Description Help Section" name="sccm : Get-CMDeviceCollectionMember.Help.has Description Help Section" time="0.0078" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="has Parameters Help Section" name="sccm : Get-CMDeviceCollectionMember.Help.has Parameters Help Section" time="0.0151" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="Example - Count should be greater than 0" name="sccm : Get-CMDeviceCollectionMember.Help.Example - Count should be greater than 0" time="0.0079" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="Example - Remarks on -------------------------- EXAMPLE 1 --------------------------" name="sccm : Get-CMDeviceCollectionMember.Help.Example - Remarks on -------------------------- EXAMPLE 1 --------------------------" time="0.008" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="has Notes Help Section" name="sccm : Get-CMDeviceCollectionMember.Help.has Notes Help Section" time="0.0077" asserts="0" success="True" result="Success" executed="True" />
+                </results>
+              </test-suite>
+              <test-suite type="TestFixture" name="Execution" executed="True" result="Success" success="True" time="0.1756" asserts="0" description="Execution">
+                <results>
+                  <test-case description="Should not throw an error if there are no problems" name="sccm : Get-CMDeviceCollectionMember.Execution.Should not throw an error if there are no problems" time="0.1756" asserts="0" success="True" result="Success" executed="True" />
+                </results>
+              </test-suite>
+              <test-suite type="TestFixture" name="Output" executed="True" result="Success" success="True" time="0.0605" asserts="0" description="Output">
+                <results>
+                  <test-case description="SHould Return a collection membership object" name="sccm : Get-CMDeviceCollectionMember.Output.SHould Return a collection membership object" time="0.0605" asserts="0" success="True" result="Success" executed="True" />
                 </results>
               </test-suite>
             </results>
           </test-suite>
-          <test-suite type="TestFixture" name="sccm : Get-SCCMSoftwareUpdate" executed="True" result="Success" success="True" time="1.2862" asserts="0" description="sccm : Get-SCCMSoftwareUpdate">
+          <test-suite type="TestFixture" name="sccm : Set-CMBaselineFromSUG" executed="True" result="Inconclusive" success="True" time="0.0836" asserts="0" description="sccm : Set-CMBaselineFromSUG">
             <results>
-              <test-suite type="TestFixture" name="Help" executed="True" result="Success" success="True" time="0.095" asserts="0" description="Help">
+              <test-suite type="TestFixture" name="Help" executed="True" result="Inconclusive" success="True" time="0.0836" asserts="0" description="Help">
                 <results>
-                  <test-case description="has Synopsis Help Section" name="sccm : Get-SCCMSoftwareUpdate.Help.has Synopsis Help Section" time="0.0492" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="has Synopsis Help Section that it not start with the command name" name="sccm : Get-SCCMSoftwareUpdate.Help.has Synopsis Help Section that it not start with the command name" time="0.0074" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="has Description Help Section" name="sccm : Get-SCCMSoftwareUpdate.Help.has Description Help Section" time="0.0068" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="has Parameters Help Section" name="sccm : Get-SCCMSoftwareUpdate.Help.has Parameters Help Section" time="0.0067" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="Example - Count should be greater than 0" name="sccm : Get-SCCMSoftwareUpdate.Help.Example - Count should be greater than 0" time="0.0097" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="has Synopsis Help Section" name="sccm : Set-CMBaselineFromSUG.Help.has Synopsis Help Section" time="0.065" asserts="0" success="True" result="Inconclusive" executed="True" />
+                  <test-case description="has Synopsis Help Section that it not start with the command name" name="sccm : Set-CMBaselineFromSUG.Help.has Synopsis Help Section that it not start with the command name" time="0.0053" asserts="0" success="True" result="Inconclusive" executed="True" />
+                  <test-case description="has Description Help Section" name="sccm : Set-CMBaselineFromSUG.Help.has Description Help Section" time="0.0026" asserts="0" success="True" result="Inconclusive" executed="True" />
+                  <test-case description="has Parameters Help Section" name="sccm : Set-CMBaselineFromSUG.Help.has Parameters Help Section" time="0.0026" asserts="0" success="True" result="Inconclusive" executed="True" />
+                  <test-case description="Example - Count should be greater than 0" name="sccm : Set-CMBaselineFromSUG.Help.Example - Count should be greater than 0" time="0.0026" asserts="0" success="True" result="Inconclusive" executed="True" />
+                  <test-case description="has Notes Help Section" name="sccm : Set-CMBaselineFromSUG.Help.has Notes Help Section" time="0.0054" asserts="0" success="True" result="Inconclusive" executed="True" />
+                </results>
+              </test-suite>
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="sccm : Get-SCCMSoftwareUpdate" executed="True" result="Success" success="True" time="0.7556" asserts="0" description="sccm : Get-SCCMSoftwareUpdate">
+            <results>
+              <test-suite type="TestFixture" name="Help" executed="True" result="Success" success="True" time="0.0996" asserts="0" description="Help">
+                <results>
+                  <test-case description="has Synopsis Help Section" name="sccm : Get-SCCMSoftwareUpdate.Help.has Synopsis Help Section" time="0.0504" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="has Synopsis Help Section that it not start with the command name" name="sccm : Get-SCCMSoftwareUpdate.Help.has Synopsis Help Section that it not start with the command name" time="0.0072" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="has Description Help Section" name="sccm : Get-SCCMSoftwareUpdate.Help.has Description Help Section" time="0.0077" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="has Parameters Help Section" name="sccm : Get-SCCMSoftwareUpdate.Help.has Parameters Help Section" time="0.0073" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="Example - Count should be greater than 0" name="sccm : Get-SCCMSoftwareUpdate.Help.Example - Count should be greater than 0" time="0.0114" asserts="0" success="True" result="Success" executed="True" />
                   <test-case description="Example - Remarks on -------------------------- EXAMPLE 1 --------------------------" name="sccm : Get-SCCMSoftwareUpdate.Help.Example - Remarks on -------------------------- EXAMPLE 1 --------------------------" time="0.0078" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="has Notes Help Section" name="sccm : Get-SCCMSoftwareUpdate.Help.has Notes Help Section" time="0.0073" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="has Notes Help Section" name="sccm : Get-SCCMSoftwareUpdate.Help.has Notes Help Section" time="0.0078" asserts="0" success="True" result="Success" executed="True" />
                 </results>
               </test-suite>
-              <test-suite type="TestFixture" name="Execution" executed="True" result="Success" success="True" time="0.6819" asserts="0" description="Execution">
+              <test-suite type="TestFixture" name="Execution" executed="True" result="Success" success="True" time="0.2584" asserts="0" description="Execution">
                 <results>
-                  <test-case description="Should Not Throw an error if there are no issues" name="sccm : Get-SCCMSoftwareUpdate.Execution.Should Not Throw an error if there are no issues" time="0.27" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="Should throw an error if there is a problem retrieving all updates" name="sccm : Get-SCCMSoftwareUpdate.Execution.Should throw an error if there is a problem retrieving all updates" time="0.3574" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="Should throw an error if there is a problem retrieving a specific update" name="sccm : Get-SCCMSoftwareUpdate.Execution.Should throw an error if there is a problem retrieving a specific update" time="0.0235" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="Should throw an error if the Config Manager Site code can not be retrieved" name="sccm : Get-SCCMSoftwareUpdate.Execution.Should throw an error if the Config Manager Site code can not be retrieved" time="0.0311" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="Should Not Throw an error if there are no issues" name="sccm : Get-SCCMSoftwareUpdate.Execution.Should Not Throw an error if there are no issues" time="0.0856" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="Should throw an error if there is a problem retrieving all updates" name="sccm : Get-SCCMSoftwareUpdate.Execution.Should throw an error if there is a problem retrieving all updates" time="0.1207" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="Should throw an error if there is a problem retrieving a specific update" name="sccm : Get-SCCMSoftwareUpdate.Execution.Should throw an error if there is a problem retrieving a specific update" time="0.0326" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="Should throw an error if the Config Manager Site code can not be retrieved" name="sccm : Get-SCCMSoftwareUpdate.Execution.Should throw an error if the Config Manager Site code can not be retrieved" time="0.0196" asserts="0" success="True" result="Success" executed="True" />
                 </results>
               </test-suite>
-              <test-suite type="TestFixture" name="Input" executed="True" result="Success" success="True" time="0.2053" asserts="0" description="Input">
+              <test-suite type="TestFixture" name="Input" executed="True" result="Success" success="True" time="0.1173" asserts="0" description="Input">
                 <results>
-                  <test-case description="Should accept pipeline input for the articleID" name="sccm : Get-SCCMSoftwareUpdate.Input.Should accept pipeline input for the articleID" time="0.078" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="Should accept an arrary as input for ArticleID" name="sccm : Get-SCCMSoftwareUpdate.Input.Should accept an arrary as input for ArticleID" time="0.089" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="Should accept a single input for ArticleID" name="sccm : Get-SCCMSoftwareUpdate.Input.Should accept a single input for ArticleID" time="0.0176" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="Should accept nothing as input for ArticlID" name="sccm : Get-SCCMSoftwareUpdate.Input.Should accept nothing as input for ArticlID" time="0.0207" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="Should accept pipeline input for the articleID" name="sccm : Get-SCCMSoftwareUpdate.Input.Should accept pipeline input for the articleID" time="0.0415" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="Should accept an arrary as input for ArticleID" name="sccm : Get-SCCMSoftwareUpdate.Input.Should accept an arrary as input for ArticleID" time="0.0323" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="Should accept a single input for ArticleID" name="sccm : Get-SCCMSoftwareUpdate.Input.Should accept a single input for ArticleID" time="0.0206" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="Should accept nothing as input for ArticlID" name="sccm : Get-SCCMSoftwareUpdate.Input.Should accept nothing as input for ArticlID" time="0.0229" asserts="0" success="True" result="Success" executed="True" />
                 </results>
               </test-suite>
-              <test-suite type="TestFixture" name="Output" executed="True" result="Success" success="True" time="0.3039" asserts="0" description="Output">
+              <test-suite type="TestFixture" name="Output" executed="True" result="Success" success="True" time="0.2803" asserts="0" description="Output">
                 <results>
-                  <test-case description="Should return an object" name="sccm : Get-SCCMSoftwareUpdate.Output.Should return an object" time="0.0867" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="should only return one object when a single ArticleID is supplied" name="sccm : Get-SCCMSoftwareUpdate.Output.should only return one object when a single ArticleID is supplied" time="0.1972" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="Should return more than one object when ArticleID is not supplied" name="sccm : Get-SCCMSoftwareUpdate.Output.Should return more than one object when ArticleID is not supplied" time="0.02" asserts="0" success="True" result="Success" executed="True" />
-                </results>
-              </test-suite>
-            </results>
-          </test-suite>
-          <test-suite type="TestFixture" name="sccm : Get-SCCMSoftwareUpdateMemberof" executed="True" result="Inconclusive" success="True" time="0.0576" asserts="0" description="sccm : Get-SCCMSoftwareUpdateMemberof">
-            <results>
-              <test-suite type="TestFixture" name="Help" executed="True" result="Inconclusive" success="True" time="0.0576" asserts="0" description="Help">
-                <results>
-                  <test-case description="has Synopsis Help Section" name="sccm : Get-SCCMSoftwareUpdateMemberof.Help.has Synopsis Help Section" time="0.0442" asserts="0" success="True" result="Inconclusive" executed="True" />
-                  <test-case description="has Synopsis Help Section that it not start with the command name" name="sccm : Get-SCCMSoftwareUpdateMemberof.Help.has Synopsis Help Section that it not start with the command name" time="0.0046" asserts="0" success="True" result="Inconclusive" executed="True" />
-                  <test-case description="has Description Help Section" name="sccm : Get-SCCMSoftwareUpdateMemberof.Help.has Description Help Section" time="0.0024" asserts="0" success="True" result="Inconclusive" executed="True" />
-                  <test-case description="has Parameters Help Section" name="sccm : Get-SCCMSoftwareUpdateMemberof.Help.has Parameters Help Section" time="0.0026" asserts="0" success="True" result="Inconclusive" executed="True" />
-                  <test-case description="Example - Count should be greater than 0" name="sccm : Get-SCCMSoftwareUpdateMemberof.Help.Example - Count should be greater than 0" time="0.0019" asserts="0" success="True" result="Inconclusive" executed="True" />
-                  <test-case description="has Notes Help Section" name="sccm : Get-SCCMSoftwareUpdateMemberof.Help.has Notes Help Section" time="0.002" asserts="0" success="True" result="Inconclusive" executed="True" />
+                  <test-case description="Should return an object" name="sccm : Get-SCCMSoftwareUpdate.Output.Should return an object" time="0.0358" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="should only return one object when a single ArticleID is supplied" name="sccm : Get-SCCMSoftwareUpdate.Output.should only return one object when a single ArticleID is supplied" time="0.2218" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="Should return more than one object when ArticleID is not supplied" name="sccm : Get-SCCMSoftwareUpdate.Output.Should return more than one object when ArticleID is not supplied" time="0.0228" asserts="0" success="True" result="Success" executed="True" />
                 </results>
               </test-suite>
             </results>
           </test-suite>
-          <test-suite type="TestFixture" name="sccm : Remove-SCCMSoftwareUpdateFromGroup" executed="True" result="Success" success="True" time="0.1521" asserts="0" description="sccm : Remove-SCCMSoftwareUpdateFromGroup">
+          <test-suite type="TestFixture" name="sccm : Get-SCCMSoftwareUpdateMemberof" executed="True" result="Inconclusive" success="True" time="0.052" asserts="0" description="sccm : Get-SCCMSoftwareUpdateMemberof">
             <results>
-              <test-suite type="TestFixture" name="Help" executed="True" result="Success" success="True" time="0.1521" asserts="0" description="Help">
+              <test-suite type="TestFixture" name="Help" executed="True" result="Inconclusive" success="True" time="0.052" asserts="0" description="Help">
                 <results>
-                  <test-case description="has Synopsis Help Section" name="sccm : Remove-SCCMSoftwareUpdateFromGroup.Help.has Synopsis Help Section" time="0.1079" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="has Synopsis Help Section that it not start with the command name" name="sccm : Remove-SCCMSoftwareUpdateFromGroup.Help.has Synopsis Help Section that it not start with the command name" time="0.0062" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="has Description Help Section" name="sccm : Remove-SCCMSoftwareUpdateFromGroup.Help.has Description Help Section" time="0.0062" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="has Parameters Help Section" name="sccm : Remove-SCCMSoftwareUpdateFromGroup.Help.has Parameters Help Section" time="0.0109" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="Example - Count should be greater than 0" name="sccm : Remove-SCCMSoftwareUpdateFromGroup.Help.Example - Count should be greater than 0" time="0.009" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="Example - Remarks on -------------------------- EXAMPLE 1 --------------------------" name="sccm : Remove-SCCMSoftwareUpdateFromGroup.Help.Example - Remarks on -------------------------- EXAMPLE 1 --------------------------" time="0.0061" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="has Notes Help Section" name="sccm : Remove-SCCMSoftwareUpdateFromGroup.Help.has Notes Help Section" time="0.0059" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="has Synopsis Help Section" name="sccm : Get-SCCMSoftwareUpdateMemberof.Help.has Synopsis Help Section" time="0.0407" asserts="0" success="True" result="Inconclusive" executed="True" />
+                  <test-case description="has Synopsis Help Section that it not start with the command name" name="sccm : Get-SCCMSoftwareUpdateMemberof.Help.has Synopsis Help Section that it not start with the command name" time="0.0024" asserts="0" success="True" result="Inconclusive" executed="True" />
+                  <test-case description="has Description Help Section" name="sccm : Get-SCCMSoftwareUpdateMemberof.Help.has Description Help Section" time="0.0021" asserts="0" success="True" result="Inconclusive" executed="True" />
+                  <test-case description="has Parameters Help Section" name="sccm : Get-SCCMSoftwareUpdateMemberof.Help.has Parameters Help Section" time="0.0021" asserts="0" success="True" result="Inconclusive" executed="True" />
+                  <test-case description="Example - Count should be greater than 0" name="sccm : Get-SCCMSoftwareUpdateMemberof.Help.Example - Count should be greater than 0" time="0.0025" asserts="0" success="True" result="Inconclusive" executed="True" />
+                  <test-case description="has Notes Help Section" name="sccm : Get-SCCMSoftwareUpdateMemberof.Help.has Notes Help Section" time="0.0021" asserts="0" success="True" result="Inconclusive" executed="True" />
                 </results>
               </test-suite>
             </results>
           </test-suite>
-          <test-suite type="TestFixture" name="sccm : Remove-SCCMSoftwareUpdateFromDeploymentPackage" executed="True" result="Success" success="True" time="0.1652" asserts="0" description="sccm : Remove-SCCMSoftwareUpdateFromDeploymentPackage">
+          <test-suite type="TestFixture" name="sccm : Remove-SCCMSoftwareUpdateFromGroup" executed="True" result="Success" success="True" time="0.1859" asserts="0" description="sccm : Remove-SCCMSoftwareUpdateFromGroup">
             <results>
-              <test-suite type="TestFixture" name="Help" executed="True" result="Success" success="True" time="0.1652" asserts="0" description="Help">
+              <test-suite type="TestFixture" name="Help" executed="True" result="Success" success="True" time="0.1859" asserts="0" description="Help">
                 <results>
-                  <test-case description="has Synopsis Help Section" name="sccm : Remove-SCCMSoftwareUpdateFromDeploymentPackage.Help.has Synopsis Help Section" time="0.092" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="has Synopsis Help Section that it not start with the command name" name="sccm : Remove-SCCMSoftwareUpdateFromDeploymentPackage.Help.has Synopsis Help Section that it not start with the command name" time="0.0103" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="has Description Help Section" name="sccm : Remove-SCCMSoftwareUpdateFromDeploymentPackage.Help.has Description Help Section" time="0.0096" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="has Parameters Help Section" name="sccm : Remove-SCCMSoftwareUpdateFromDeploymentPackage.Help.has Parameters Help Section" time="0.0141" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="Example - Count should be greater than 0" name="sccm : Remove-SCCMSoftwareUpdateFromDeploymentPackage.Help.Example - Count should be greater than 0" time="0.0104" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="Example - Remarks on -------------------------- EXAMPLE 1 --------------------------" name="sccm : Remove-SCCMSoftwareUpdateFromDeploymentPackage.Help.Example - Remarks on -------------------------- EXAMPLE 1 --------------------------" time="0.0098" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="Example - Remarks on -------------------------- EXAMPLE 2 --------------------------" name="sccm : Remove-SCCMSoftwareUpdateFromDeploymentPackage.Help.Example - Remarks on -------------------------- EXAMPLE 2 --------------------------" time="0.0093" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="has Notes Help Section" name="sccm : Remove-SCCMSoftwareUpdateFromDeploymentPackage.Help.has Notes Help Section" time="0.0097" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="has Synopsis Help Section" name="sccm : Remove-SCCMSoftwareUpdateFromGroup.Help.has Synopsis Help Section" time="0.0677" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="has Synopsis Help Section that it not start with the command name" name="sccm : Remove-SCCMSoftwareUpdateFromGroup.Help.has Synopsis Help Section that it not start with the command name" time="0.0124" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="has Description Help Section" name="sccm : Remove-SCCMSoftwareUpdateFromGroup.Help.has Description Help Section" time="0.012" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="has Parameters Help Section" name="sccm : Remove-SCCMSoftwareUpdateFromGroup.Help.has Parameters Help Section" time="0.0165" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="Example - Count should be greater than 0" name="sccm : Remove-SCCMSoftwareUpdateFromGroup.Help.Example - Count should be greater than 0" time="0.0078" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="Example - Remarks on -------------------------- EXAMPLE 1 --------------------------" name="sccm : Remove-SCCMSoftwareUpdateFromGroup.Help.Example - Remarks on -------------------------- EXAMPLE 1 --------------------------" time="0.0112" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="has Notes Help Section" name="sccm : Remove-SCCMSoftwareUpdateFromGroup.Help.has Notes Help Section" time="0.0583" asserts="0" success="True" result="Success" executed="True" />
                 </results>
               </test-suite>
             </results>
           </test-suite>
-          <test-suite type="TestFixture" name="sccm : Refresh-SCCMSoftwareUpdateDeploymentPackage" executed="True" result="Success" success="True" time="0.1231" asserts="0" description="sccm : Refresh-SCCMSoftwareUpdateDeploymentPackage">
+          <test-suite type="TestFixture" name="sccm : Remove-SCCMSoftwareUpdateFromDeploymentPackage" executed="True" result="Success" success="True" time="0.1389" asserts="0" description="sccm : Remove-SCCMSoftwareUpdateFromDeploymentPackage">
             <results>
-              <test-suite type="TestFixture" name="Help" executed="True" result="Success" success="True" time="0.1231" asserts="0" description="Help">
+              <test-suite type="TestFixture" name="Help" executed="True" result="Success" success="True" time="0.1389" asserts="0" description="Help">
                 <results>
-                  <test-case description="has Synopsis Help Section" name="sccm : Refresh-SCCMSoftwareUpdateDeploymentPackage.Help.has Synopsis Help Section" time="0.0751" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="has Synopsis Help Section that it not start with the command name" name="sccm : Refresh-SCCMSoftwareUpdateDeploymentPackage.Help.has Synopsis Help Section that it not start with the command name" time="0.0068" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="has Description Help Section" name="sccm : Refresh-SCCMSoftwareUpdateDeploymentPackage.Help.has Description Help Section" time="0.0102" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="has Parameters Help Section" name="sccm : Refresh-SCCMSoftwareUpdateDeploymentPackage.Help.has Parameters Help Section" time="0.0069" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="Example - Count should be greater than 0" name="sccm : Refresh-SCCMSoftwareUpdateDeploymentPackage.Help.Example - Count should be greater than 0" time="0.0115" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="Example - Remarks on -------------------------- EXAMPLE 1 --------------------------" name="sccm : Refresh-SCCMSoftwareUpdateDeploymentPackage.Help.Example - Remarks on -------------------------- EXAMPLE 1 --------------------------" time="0.0064" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="has Notes Help Section" name="sccm : Refresh-SCCMSoftwareUpdateDeploymentPackage.Help.has Notes Help Section" time="0.0062" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="has Synopsis Help Section" name="sccm : Remove-SCCMSoftwareUpdateFromDeploymentPackage.Help.has Synopsis Help Section" time="0.0823" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="has Synopsis Help Section that it not start with the command name" name="sccm : Remove-SCCMSoftwareUpdateFromDeploymentPackage.Help.has Synopsis Help Section that it not start with the command name" time="0.0104" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="has Description Help Section" name="sccm : Remove-SCCMSoftwareUpdateFromDeploymentPackage.Help.has Description Help Section" time="0.0077" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="has Parameters Help Section" name="sccm : Remove-SCCMSoftwareUpdateFromDeploymentPackage.Help.has Parameters Help Section" time="0.0071" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="Example - Count should be greater than 0" name="sccm : Remove-SCCMSoftwareUpdateFromDeploymentPackage.Help.Example - Count should be greater than 0" time="0.0115" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="Example - Remarks on -------------------------- EXAMPLE 1 --------------------------" name="sccm : Remove-SCCMSoftwareUpdateFromDeploymentPackage.Help.Example - Remarks on -------------------------- EXAMPLE 1 --------------------------" time="0.0067" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="Example - Remarks on -------------------------- EXAMPLE 2 --------------------------" name="sccm : Remove-SCCMSoftwareUpdateFromDeploymentPackage.Help.Example - Remarks on -------------------------- EXAMPLE 2 --------------------------" time="0.0065" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="has Notes Help Section" name="sccm : Remove-SCCMSoftwareUpdateFromDeploymentPackage.Help.has Notes Help Section" time="0.0067" asserts="0" success="True" result="Success" executed="True" />
                 </results>
               </test-suite>
             </results>
           </test-suite>
-          <test-suite type="TestFixture" name="sccm : Get-SCCMSoftwareUpdateDeploymentPackageUpdateSourcePath" executed="True" result="Success" success="True" time="0.0956" asserts="0" description="sccm : Get-SCCMSoftwareUpdateDeploymentPackageUpdateSourcePath">
+          <test-suite type="TestFixture" name="sccm : Refresh-SCCMSoftwareUpdateDeploymentPackage" executed="True" result="Success" success="True" time="0.0903" asserts="0" description="sccm : Refresh-SCCMSoftwareUpdateDeploymentPackage">
             <results>
-              <test-suite type="TestFixture" name="Help" executed="True" result="Success" success="True" time="0.0956" asserts="0" description="Help">
+              <test-suite type="TestFixture" name="Help" executed="True" result="Success" success="True" time="0.0903" asserts="0" description="Help">
                 <results>
-                  <test-case description="has Synopsis Help Section" name="sccm : Get-SCCMSoftwareUpdateDeploymentPackageUpdateSourcePath.Help.has Synopsis Help Section" time="0.0411" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="has Synopsis Help Section that it not start with the command name" name="sccm : Get-SCCMSoftwareUpdateDeploymentPackageUpdateSourcePath.Help.has Synopsis Help Section that it not start with the command name" time="0.01" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="has Description Help Section" name="sccm : Get-SCCMSoftwareUpdateDeploymentPackageUpdateSourcePath.Help.has Description Help Section" time="0.0109" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="has Parameters Help Section" name="sccm : Get-SCCMSoftwareUpdateDeploymentPackageUpdateSourcePath.Help.has Parameters Help Section" time="0.0067" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="Example - Count should be greater than 0" name="sccm : Get-SCCMSoftwareUpdateDeploymentPackageUpdateSourcePath.Help.Example - Count should be greater than 0" time="0.0141" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="Example - Remarks on -------------------------- EXAMPLE 1 --------------------------" name="sccm : Get-SCCMSoftwareUpdateDeploymentPackageUpdateSourcePath.Help.Example - Remarks on -------------------------- EXAMPLE 1 --------------------------" time="0.0064" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="has Notes Help Section" name="sccm : Get-SCCMSoftwareUpdateDeploymentPackageUpdateSourcePath.Help.has Notes Help Section" time="0.0063" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="has Synopsis Help Section" name="sccm : Refresh-SCCMSoftwareUpdateDeploymentPackage.Help.has Synopsis Help Section" time="0.0448" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="has Synopsis Help Section that it not start with the command name" name="sccm : Refresh-SCCMSoftwareUpdateDeploymentPackage.Help.has Synopsis Help Section that it not start with the command name" time="0.007" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="has Description Help Section" name="sccm : Refresh-SCCMSoftwareUpdateDeploymentPackage.Help.has Description Help Section" time="0.0109" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="has Parameters Help Section" name="sccm : Refresh-SCCMSoftwareUpdateDeploymentPackage.Help.has Parameters Help Section" time="0.0071" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="Example - Count should be greater than 0" name="sccm : Refresh-SCCMSoftwareUpdateDeploymentPackage.Help.Example - Count should be greater than 0" time="0.0069" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="Example - Remarks on -------------------------- EXAMPLE 1 --------------------------" name="sccm : Refresh-SCCMSoftwareUpdateDeploymentPackage.Help.Example - Remarks on -------------------------- EXAMPLE 1 --------------------------" time="0.0069" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="has Notes Help Section" name="sccm : Refresh-SCCMSoftwareUpdateDeploymentPackage.Help.has Notes Help Section" time="0.0067" asserts="0" success="True" result="Success" executed="True" />
                 </results>
               </test-suite>
             </results>
           </test-suite>
-          <test-suite type="TestFixture" name="sccm : Add-SCCMUpdateToDeploymentPackage" executed="True" result="Success" success="True" time="0.1438" asserts="0" description="sccm : Add-SCCMUpdateToDeploymentPackage">
+          <test-suite type="TestFixture" name="sccm : Get-SCCMSoftwareUpdateDeploymentPackageUpdateSourcePath" executed="True" result="Success" success="True" time="0.0965" asserts="0" description="sccm : Get-SCCMSoftwareUpdateDeploymentPackageUpdateSourcePath">
             <results>
-              <test-suite type="TestFixture" name="Help" executed="True" result="Success" success="True" time="0.1438" asserts="0" description="Help">
+              <test-suite type="TestFixture" name="Help" executed="True" result="Success" success="True" time="0.0965" asserts="0" description="Help">
                 <results>
-                  <test-case description="has Synopsis Help Section" name="sccm : Add-SCCMUpdateToDeploymentPackage.Help.has Synopsis Help Section" time="0.1017" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="has Synopsis Help Section that it not start with the command name" name="sccm : Add-SCCMUpdateToDeploymentPackage.Help.has Synopsis Help Section that it not start with the command name" time="0.0064" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="has Description Help Section" name="sccm : Add-SCCMUpdateToDeploymentPackage.Help.has Description Help Section" time="0.0062" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="has Parameters Help Section" name="sccm : Add-SCCMUpdateToDeploymentPackage.Help.has Parameters Help Section" time="0.0104" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="Example - Count should be greater than 0" name="sccm : Add-SCCMUpdateToDeploymentPackage.Help.Example - Count should be greater than 0" time="0.0065" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="Example - Remarks on -------------------------- EXAMPLE 1 --------------------------" name="sccm : Add-SCCMUpdateToDeploymentPackage.Help.Example - Remarks on -------------------------- EXAMPLE 1 --------------------------" time="0.0062" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="has Notes Help Section" name="sccm : Add-SCCMUpdateToDeploymentPackage.Help.has Notes Help Section" time="0.0063" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="has Synopsis Help Section" name="sccm : Get-SCCMSoftwareUpdateDeploymentPackageUpdateSourcePath.Help.has Synopsis Help Section" time="0.0452" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="has Synopsis Help Section that it not start with the command name" name="sccm : Get-SCCMSoftwareUpdateDeploymentPackageUpdateSourcePath.Help.has Synopsis Help Section that it not start with the command name" time="0.0118" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="has Description Help Section" name="sccm : Get-SCCMSoftwareUpdateDeploymentPackageUpdateSourcePath.Help.has Description Help Section" time="0.007" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="has Parameters Help Section" name="sccm : Get-SCCMSoftwareUpdateDeploymentPackageUpdateSourcePath.Help.has Parameters Help Section" time="0.0071" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="Example - Count should be greater than 0" name="sccm : Get-SCCMSoftwareUpdateDeploymentPackageUpdateSourcePath.Help.Example - Count should be greater than 0" time="0.0099" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="Example - Remarks on -------------------------- EXAMPLE 1 --------------------------" name="sccm : Get-SCCMSoftwareUpdateDeploymentPackageUpdateSourcePath.Help.Example - Remarks on -------------------------- EXAMPLE 1 --------------------------" time="0.008" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="has Notes Help Section" name="sccm : Get-SCCMSoftwareUpdateDeploymentPackageUpdateSourcePath.Help.has Notes Help Section" time="0.0074" asserts="0" success="True" result="Success" executed="True" />
                 </results>
               </test-suite>
             </results>
           </test-suite>
-          <test-suite type="TestFixture" name="sccm : Clear-SCCMClientCache" executed="True" result="Success" success="True" time="0.0882" asserts="0" description="sccm : Clear-SCCMClientCache">
+          <test-suite type="TestFixture" name="sccm : Add-SCCMUpdateToDeploymentPackage" executed="True" result="Success" success="True" time="0.1005" asserts="0" description="sccm : Add-SCCMUpdateToDeploymentPackage">
             <results>
-              <test-suite type="TestFixture" name="Help" executed="True" result="Success" success="True" time="0.0882" asserts="0" description="Help">
+              <test-suite type="TestFixture" name="Help" executed="True" result="Success" success="True" time="0.1005" asserts="0" description="Help">
                 <results>
-                  <test-case description="has Synopsis Help Section" name="sccm : Clear-SCCMClientCache.Help.has Synopsis Help Section" time="0.0478" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="has Synopsis Help Section that it not start with the command name" name="sccm : Clear-SCCMClientCache.Help.has Synopsis Help Section that it not start with the command name" time="0.0059" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="has Description Help Section" name="sccm : Clear-SCCMClientCache.Help.has Description Help Section" time="0.0101" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="has Parameters Help Section" name="sccm : Clear-SCCMClientCache.Help.has Parameters Help Section" time="0.0059" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="has Synopsis Help Section" name="sccm : Add-SCCMUpdateToDeploymentPackage.Help.has Synopsis Help Section" time="0.0509" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="has Synopsis Help Section that it not start with the command name" name="sccm : Add-SCCMUpdateToDeploymentPackage.Help.has Synopsis Help Section that it not start with the command name" time="0.0085" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="has Description Help Section" name="sccm : Add-SCCMUpdateToDeploymentPackage.Help.has Description Help Section" time="0.0071" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="has Parameters Help Section" name="sccm : Add-SCCMUpdateToDeploymentPackage.Help.has Parameters Help Section" time="0.0087" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="Example - Count should be greater than 0" name="sccm : Add-SCCMUpdateToDeploymentPackage.Help.Example - Count should be greater than 0" time="0.0118" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="Example - Remarks on -------------------------- EXAMPLE 1 --------------------------" name="sccm : Add-SCCMUpdateToDeploymentPackage.Help.Example - Remarks on -------------------------- EXAMPLE 1 --------------------------" time="0.0068" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="has Notes Help Section" name="sccm : Add-SCCMUpdateToDeploymentPackage.Help.has Notes Help Section" time="0.0067" asserts="0" success="True" result="Success" executed="True" />
+                </results>
+              </test-suite>
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="sccm : Clear-SCCMClientCache" executed="True" result="Success" success="True" time="0.0854" asserts="0" description="sccm : Clear-SCCMClientCache">
+            <results>
+              <test-suite type="TestFixture" name="Help" executed="True" result="Success" success="True" time="0.0854" asserts="0" description="Help">
+                <results>
+                  <test-case description="has Synopsis Help Section" name="sccm : Clear-SCCMClientCache.Help.has Synopsis Help Section" time="0.0443" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="has Synopsis Help Section that it not start with the command name" name="sccm : Clear-SCCMClientCache.Help.has Synopsis Help Section that it not start with the command name" time="0.0078" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="has Description Help Section" name="sccm : Clear-SCCMClientCache.Help.has Description Help Section" time="0.0091" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="has Parameters Help Section" name="sccm : Clear-SCCMClientCache.Help.has Parameters Help Section" time="0.0062" asserts="0" success="True" result="Success" executed="True" />
                   <test-case description="Example - Count should be greater than 0" name="sccm : Clear-SCCMClientCache.Help.Example - Count should be greater than 0" time="0.0063" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="Example - Remarks on -------------------------- EXAMPLE 1 --------------------------" name="sccm : Clear-SCCMClientCache.Help.Example - Remarks on -------------------------- EXAMPLE 1 --------------------------" time="0.0062" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="has Notes Help Section" name="sccm : Clear-SCCMClientCache.Help.has Notes Help Section" time="0.0061" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="Example - Remarks on -------------------------- EXAMPLE 1 --------------------------" name="sccm : Clear-SCCMClientCache.Help.Example - Remarks on -------------------------- EXAMPLE 1 --------------------------" time="0.006" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="has Notes Help Section" name="sccm : Clear-SCCMClientCache.Help.has Notes Help Section" time="0.0057" asserts="0" success="True" result="Success" executed="True" />
                 </results>
               </test-suite>
             </results>
